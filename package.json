@@ -1,0 +1,26 @@
+{
+  "name": "bitchin-kitchen",
+  "version": "1.0.0",
+  "description": "Bitchin Kitchen Web App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rperez2021/bitchin-kitchen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rperez2021/bitchin-kitchen/issues"
+  },
+  "homepage": "https://github.com/rperez2021/bitchin-kitchen#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "pg": "^7.4.3",
+    "sequelize": "^4.37.7"
+  }
+}
