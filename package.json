@@ -19,7 +19,9 @@
   "homepage": "https://github.com/rperez2021/bitchin-kitchen#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "node-cmd": "^3.0.0",
     "pg": "^7.4.3",
     "sequelize": "^4.37.7"
   }

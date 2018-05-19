@@ -2,6 +2,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
+require('dotenv').config();
+const cmd = require('node-cmd');
+
 var app = express();
 var PORT = process.env.PORT || 8080;
 
@@ -22,6 +25,7 @@ app.use(express.static("public"));
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({ force: true }).then(function() {
+  cmd.run(`psql -U ${process.env.DB_USER} -W ${process.env.DB_PASS} bkitchen < db/seeds.sql`)
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
