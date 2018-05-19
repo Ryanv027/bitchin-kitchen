@@ -25,7 +25,7 @@ app.use(express.static("public"));
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({ force: true }).then(function() {
-  cmd.run(`psql -U ${process.env.DB_USER} -W ${process.env.DB_PASS} bkitchen < db/seeds.sql`)
+  cmd.run(`psql -U ${process.env.DB_USER} bkitchen < db/seeds.sql`)
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
