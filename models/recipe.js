@@ -41,8 +41,17 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   recipe.associate = function (models) {
-    recipe.belongsTo(models.user)
-    recipe.belongsToMany(models.user)
+    recipe.belongsTo(models.user, {
+      foreignKey: 'user_name',
+      sourceKey: 'chef'
+    });
+
+    recipe.belongsToMany(models.user, {
+      as: 'Chosen_Recipe',
+      through: 'user_recipes',
+      foreignKey: 'recipe_id',
+      otherKey: 'user_id'
+    });
   }
 
   return recipe;
