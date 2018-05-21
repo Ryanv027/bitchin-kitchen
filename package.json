@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npx webpack --config webpack.config.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "server": "nodemon src/server/index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -27,17 +30,27 @@
     "node-cmd": "^3.0.0",
     "pg": "^7.4.3",
     "popper.js": "^1.14.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "sequelize": "^4.37.8"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.0",
     "postcss-loader": "^2.1.5",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
-    "webpack": "^3.12.0"
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "^3.1.4"
   }
 }

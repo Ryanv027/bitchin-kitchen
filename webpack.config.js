@@ -1,6 +1,10 @@
 var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const outputDirectory = 'public';
 
 module.exports = {
     context: __dirname,
@@ -16,6 +20,11 @@ module.exports = {
                     'jQuery': "jquery",
                     'Popper': 'popper.js'
         }),
+        new ExtractTextPlugin({filename: 'style/main.css'}),
+        new CleanWebpackPlugin([outputDirectory]),
+        new HtmlWebpackPlugin({
+            template: './src/template.html'
+        }),
     ] : [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -23,6 +32,13 @@ module.exports = {
     ],
     module: {
         rules:[
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: 'babel-loader'
+                }
+            },
             {
                 test:/\.(s*)css$/,
                 use: ExtractTextPlugin.extract({ 
@@ -36,12 +52,17 @@ module.exports = {
                   loader: "file-loader",
                   options: {
                     name: "fonts/[name].[ext]",
+                    publicPath: "../",//prevents css from thinking its under 'styles'
                   },
                 },
               },
         ]
     },
-    plugins: [
-        new ExtractTextPlugin({filename: 'style/main.css'}),
-    ]
+    devServer: {
+        port: 3000,
+        open: true,
+        proxy: {
+          '/api': 'http://localhost:8080'
+        }
+    },
 };
