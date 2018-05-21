@@ -1,10 +1,10 @@
 {
   "development": {
-       "database": "bkitchen",
-       "host": "localhost",
-       "dialect": "postgres",
-       "username": "randomuser",
-       "password": "123456"
+    "database": "ebdb",
+    "host": "aa1mjb5wuri7pyd.cjwbuekr1fgs.us-east-2.rds.amazonaws.com",
+    "dialect": "postgres", 
+    "username": "postgres",
+    "password": "mithas95"
      },
      "test": {
        "database": "ebdb",
