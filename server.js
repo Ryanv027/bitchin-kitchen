@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Static directory
-// app.use(express.static("public"));
+app.use(express.static("public"));
 
 
 // Routes go Here
@@ -26,7 +26,7 @@ require("./routes/react-route.js")(app);
 // =============================================================
 db.sequelize.sync({ force: true }).then(function() {
   cmd.run(`psql -U ${process.env.DB_USER} ebdb < db/seeds.sql`)
-  app.listen(PORT, function() {
+  app.listen(8080, function() {
     console.log("App listening on PORT " + PORT);
   });
 });
