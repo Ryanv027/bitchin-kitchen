@@ -1,7 +1,6 @@
 
 var express = require("express");
 var bodyParser = require("body-parser");
-var path = require("path")
 
 require('dotenv').config();
 const cmd = require('node-cmd');
@@ -12,12 +11,12 @@ var PORT = process.env.PORT || 8080;
 // Requiring our models for syncing
 var db = require("./models");
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Static directory
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static("public"));
+
 
 // Routes go Here
 require("./routes/react-route.js")(app);
