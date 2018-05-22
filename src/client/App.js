@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import './app.css';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Home } from './Home';
 
 export default class App extends Component {
   constructor(props) {
@@ -7,22 +8,14 @@ export default class App extends Component {
     this.state = { welcome: null };
   }
 
-  componentDidMount() {
-    console.log(this.state)
-    fetch('/api/welcome')
-      .then(res => res.json())
-      .then(rroute => this.setState({ welcome: rroute.welcome }));
-  }
-
   render() {
     return (
-      <div>
-        {this.state.welcome ? (
-          <h1>Hello {this.state.welcome}</h1>
-        ) : (
-          <h1>Loading.. please wait!</h1>
-        )}
-      </div>
+      <HashRouter>
+        <Switch>
+          <Route exact path = '/' component = {Home}/>
+          {/* <Route exact path = '/about' component = {About}/> */}
+        </Switch>
+      </HashRouter>
     );
   }
 }
