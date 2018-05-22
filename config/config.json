@@ -2,7 +2,9 @@
   "development": {
        "database": "bkitchen",
        "host": "localhost",
-       "dialect": "postgres"
+       "dialect": "postgres", 
+       "username": "randomuser",
+       "password": "123456"
      },
      "test": {
        "database": "database_test",
