@@ -26,7 +26,7 @@ require("./routes/react-route.js")(app);
 // =============================================================
 db.sequelize.sync({ force: true }).then(function() {
   cmd.run(`psql -U ${process.env.DB_USER} ebdb < db/seeds.sql`)
-  app.listen(8080, function() {
+  app.listen(1337, function() {
     console.log("App listening on PORT " + PORT);
   });
 });
