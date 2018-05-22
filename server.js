@@ -7,8 +7,8 @@ const cmd = require('node-cmd');
 
 var app = express();
 var PORT = process.env.PORT || 8080;
-var DB_USER = process.env.DB_USER
-var DB_NAME = process.env.DB_NAME
+var DB_USER = process.env.RDS_USERNAME
+var DB_NAME = process.env.RDS_DB_NAME
 
 // Requiring our models for syncing
 var db = require("./models");

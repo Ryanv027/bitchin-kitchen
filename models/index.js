@@ -8,9 +8,9 @@ var env = process.env.NODE_ENV || "development";
 var db = {};
 
 
-var sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+var sequelize = new Sequelize(process.env.RDS_DB_NAME, process.env.RDS_USERNAME, process.env.RDS_PASSWORD, {
   dialect: 'postgres',
-  host: process.env.DB_HOST
+  host: process.env.RDS_HOSTNAME
 });
 
 fs
