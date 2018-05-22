@@ -18,9 +18,6 @@ app.use(bodyParser.json());
 
 // Static directory
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
-})
 
 // Routes go Here
 require("./routes/react-route.js")(app);
