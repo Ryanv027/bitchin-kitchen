@@ -1,17 +1,23 @@
 {
   "development": {
-       "database": "bkitchen",
-       "host": "localhost",
-       "dialect": "postgres"
+    "database": "ebdb",
+    "host": "aa1mjb5wuri7pyd.cjwbuekr1fgs.us-east-2.rds.amazonaws.com",
+    "dialect": "postgres", 
+    "username": "postgres",
+    "password": "mithas95"
      },
      "test": {
-       "database": "database_test",
-       "host": "127.0.0.1",
-       "dialect": "postgres"
+       "database": "ebdb",
+       "host": "aa1mjb5wuri7pyd.cjwbuekr1fgs.us-east-2.rds.amazonaws.com",
+       "dialect": "postgres", 
+       "username": "postgres",
+       "password": "mithas95"
      },
      "production": {
-       "database": "database_production",
-       "host": "127.0.0.1",
-        "dialect": "postgres"
+       "database": "ebdb",
+       "host": "aa1mjb5wuri7pyd.cjwbuekr1fgs.us-east-2.rds.amazonaws.com",
+        "dialect": "postgres",
+        "username": "postgres",
+        "password": "mithas95"
      }
 }
