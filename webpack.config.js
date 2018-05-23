@@ -16,53 +16,59 @@ module.exports = {
     },
     plugins: debug ? [
         new webpack.ProvidePlugin({
-                    '$': "jquery",
-                    'jQuery': "jquery",
-                    'Popper': 'popper.js'
+            '$': "jquery",
+            'jQuery': "jquery",
+            'Popper': 'popper.js'
         }),
-        new ExtractTextPlugin({filename: 'style/main.css'}),
+        new ExtractTextPlugin({ filename: 'style/main.css' }),
         new CleanWebpackPlugin([outputDirectory]),
         new HtmlWebpackPlugin({
             template: './src/template.html'
         }),
     ] : [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-    ],
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.OccurenceOrderPlugin(),
+            new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+        ],
     module: {
-        rules:[
+        rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                  loader: 'babel-loader'
+                    loader: 'babel-loader'
                 }
             },
             {
-                test:/\.(s*)css$/,
-                use: ExtractTextPlugin.extract({ 
-                    fallback:'style-loader',
-                    use:['css-loader','sass-loader'],
+                test: /\.(s*)css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader'],
                 })
-             },
-             {
+            },
+            {
                 test: /\.(ttf|eot|woff|woff2)$/,
                 use: {
-                  loader: "file-loader",
-                  options: {
-                    name: "fonts/[name].[ext]",
-                    publicPath: "../",//prevents css from thinking its under 'styles'
-                  },
+                    loader: "file-loader",
+                    options: {
+                        name: "fonts/[name].[ext]",
+                        publicPath: "../",//prevents css from thinking its under 'styles'
+                    },
                 },
-              },
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
+            }
         ]
     },
     devServer: {
         port: 3000,
         open: true,
         proxy: {
-          '/api': 'http://localhost:8080'
+            '/api': 'http://localhost:8080'
         }
     },
 };
