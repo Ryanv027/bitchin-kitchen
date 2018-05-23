@@ -49,12 +49,17 @@ export class Home extends React.Component {
           <div className="row mt-2">
             <div className="col-2"></div>
             <div className="col-8">
-              <p className="text-center">
-                <h1>Welcome to Bitchin Kitchen</h1>
-                <h3>Making Your Meal Prep Easy!</h3>
-              </p>
-              <div className="col-1"></div>
-              <div className="col-6">
+              
+                <h1 className="text-center">Welcome to Bitchin Kitchen</h1>
+                <h3 className="text-center">Making Your Meal Prep Easy!</h3>
+              
+              
+            </div>
+            <div className="col-2"></div>
+          </div>
+          <div className="row mt-2">
+          <div className="col-2"></div>
+              <div className="col-8">
                 <ul className="list-group">
                   <li className="list-group-item d-flex justify-content-between align-items-center">Find New Recipes</li>
                   <li className="list-group-item d-flex justify-content-between align-items-center">Organize Your Meals</li>
@@ -62,10 +67,8 @@ export class Home extends React.Component {
                   <li className="list-group-item d-flex justify-content-between align-items-center">Save Your Recipes for Later</li>
                 </ul>
               </div>
-              <div className="col-1"></div>
-            </div>
-            <div className="col-2"></div>
-          </div>
+              <div className="col-2"></div>
+              </div>
         </div>
 
 

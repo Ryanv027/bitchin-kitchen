@@ -46,7 +46,7 @@ body {
   background: #221f1f;
   color: #ffffff;
   font-family: "Lato", sans-serif;
-  background-image: "../images/bgphoto1.jpg"
+  background: url("./../images/bgphoto1.jpg")
 }
 
 h2, .TitleList .Title {
