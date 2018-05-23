@@ -3,6 +3,7 @@ import { Navigation } from './components/Navigation'
 import { Userstatus } from './components/Userstatus'
 import { Search } from './components/Search'
 import { Logo } from './components/Logo'
+import { Newnav } from './components/Newnav'
 import './new.css';
 
 export class Home extends React.Component {
@@ -32,16 +33,9 @@ export class Home extends React.Component {
     return (
       <div>
 
-        <div className="container-fluid">
-          <header>
-            <div className="row my-2">
-              <Logo />
-              <Navigation />
-              <Search />
-              <Userstatus />
-            </div>
-          </header>
-        </div>
+
+        <Newnav />
+
 
 
 
@@ -49,27 +43,49 @@ export class Home extends React.Component {
           <div className="row mt-2">
             <div className="col-2"></div>
             <div className="col-8">
-              
-                <h1 className="text-center">Welcome to Bitchin Kitchen</h1>
-                <h3 className="text-center">Making Your Meal Prep Easy!</h3>
-              
-              
+
+              <h1 className="text-center">Welcome to Bitchin Kitchen</h1>
+              <h3 className="text-center">Making Your Meal Prep Easy!</h3>
+
+
             </div>
             <div className="col-2"></div>
           </div>
           <div className="row mt-2">
-          <div className="col-2"></div>
-              <div className="col-8">
-                <ul className="list-group">
-                  <li className="list-group-item d-flex justify-content-between align-items-center">Find New Recipes</li>
-                  <li className="list-group-item d-flex justify-content-between align-items-center">Organize Your Meals</li>
-                  <li className="list-group-item d-flex justify-content-between align-items-center">Create Your Own Recipes</li>
-                  <li className="list-group-item d-flex justify-content-between align-items-center">Save Your Recipes for Later</li>
-                </ul>
-              </div>
-              <div className="col-2"></div>
-              </div>
+            <div className="col-3"></div>
+            <div className="col-6">
+              <ul className="list-group">
+                <li className="list-group-item d-flex justify-content-between align-items-center">Find New Recipes</li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">Organize Your Meals</li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">Create Your Own Recipes</li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">Save Your Recipes for Later</li>
+                <li className="list-group-item d-flex justify-content-between align-items-center">Plan Your Meals for the Week</li>
+
+              </ul>
+            </div>
+            <div className="col-3"></div>
+          </div>
+
+          <div className="row mt-2">
+            <div className="col-3"></div>
+            <div className="col-6 text-center">
+              <button type="button" className="btn btn-danger btn-lg mx-1">Join Today!</button>
+              <button type="button" className="btn btn-info btn-lg mx-1">Log In</button>
+            </div>
+            <div className="col-3"></div>
+          </div>
+
         </div>
+
+        <footer className="footer">
+          <div className="row m-0">
+            <div className="col-12 pt-3">
+              <p className="text-center">
+                Created by Brian, Kyle, Robert and Ryan in 2018
+              </p>
+            </div>
+          </div>
+        </footer>
 
 
       </div>
