@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/rperez2021/bitchin-kitchen#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.1",
     "dotenv": "^5.0.1",
