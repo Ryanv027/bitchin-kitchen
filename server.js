@@ -22,6 +22,7 @@ app.use(express.static("public"));
 
 // Routes go Here
 require("./routes/react-route.js")(app);
+require("./api/yummly")(app);
 
 
 // Syncing our sequelize models and then starting our Express app
