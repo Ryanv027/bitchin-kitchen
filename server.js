@@ -1,4 +1,3 @@
-
 var express = require("express");
 var bodyParser = require("body-parser");
 
@@ -21,8 +20,8 @@ app.use(express.static("public"));
 
 
 // Routes go Here
-require("./routes/react-route.js")(app);
-require("./api/yummly")(app);
+require("./routes/routes")(app);
+// require("./routes/react-route.js")(app);
 
 
 // Syncing our sequelize models and then starting our Express app
