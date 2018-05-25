@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx webpack --config webpack.config.js",
+    "build": "npx webpack --config webpack.config.js --watch",
     "start": "node server.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
@@ -33,6 +33,8 @@
     "popper.js": "^1.14.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-infinite": "^0.13.0",
+    "react-modal": "^3.4.4",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "sequelize": "^4.37.8"

@@ -13,7 +13,7 @@ export class Home extends React.Component {
       searchTerm: null,
     };
   }
-
+  
   getInitialState() {
     return { searchTerm: "", searchUrl: "" };
   }

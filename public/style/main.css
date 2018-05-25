@@ -6802,6 +6802,11 @@ body, p {
 footer {
   font-size: 12px; }
 
+.scrollBox {
+  width: 400px;
+  height: 400px;
+  overflow: scroll; }
+
 @font-face {
   font-family: 'montserratlt';
   src: url(../fonts/montserrat-light-webfont.woff2) format("woff2"), url(../fonts/montserrat-light-webfont.woff) format("woff");
