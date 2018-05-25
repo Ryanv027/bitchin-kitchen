@@ -5,6 +5,9 @@ import { Search } from './components/Search'
 import { Logo } from './components/Logo'
 import { Newnav } from './components/Newnav'
 import './new.css';
+import firebase, { auth, provider } from './firebase.js';
+import firebaseui from 'firebaseui';
+import 'firebase/auth';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -12,6 +15,8 @@ export class Home extends React.Component {
     this.state = {
       searchTerm: null,
     };
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   getInitialState() {
@@ -27,6 +32,32 @@ export class Home extends React.Component {
 
   handleChange(e) {
     this.setState({ searchTerm: e.target.value });
+  }
+
+  logout() {
+    auth.signOut()
+    .then(() => {
+      this.setState({
+        user: null
+      });
+    });
+  }
+  login() {
+    auth.signInWithPopup(provider) 
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      });
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } 
+    });
   }
 
   render() {
@@ -69,8 +100,11 @@ export class Home extends React.Component {
           <div className="row mt-2">
             <div className="col-3"></div>
             <div className="col-6 text-center">
-              <button type="button" className="btn btn-danger btn-lg mx-1">Join Today!</button>
-              <button type="button" className="btn btn-info btn-lg mx-1">Log In</button>
+            {this.state.user ?
+              <button type="button" className="btn btn-danger btn-lg mx-1" onClick={this.logout}>Log Out</button>
+              :
+              <button type="button" className="btn btn-info btn-lg mx-1" onClick={this.login}>Log In</button>
+            }
             </div>
             <div className="col-3"></div>
           </div>
