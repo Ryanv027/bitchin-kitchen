@@ -1,15 +1,31 @@
 import React from 'react';
 export class Userstatus extends React.Component {
-    render() {
-      return (
-          <div className="col-2">
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="col-4">
         <div className="UserProfile">
-          <div className="User">   
-            <div className="image"><img src="https://brevity-is.com/img/team/1a.jpg" alt="profile" /></div>
-            <div className="name pt-3"><p>Robert</p></div>
+          <div className="User">
+            {this.props.user ?
+              <div className="row">
+                
+                <div className="pt-2 ml-1">
+                <button type="button" className="btn btn-secondary btn-sm" onClick={this.props.onClickLogout}>Log Out</button>
+                </div>
+                <div className="image"><img src={this.props.user.photoURL} /></div>
+                <div className="name pt-3"><p>{this.props.user.displayName || this.props.user.email}</p></div>
+              </div>
+              :
+              <button type="button" className="btn btn-primary btn-sm" onClick={this.props.onClickLogin}>Log In</button>
+              
+
+            }
           </div>
         </div>
-        </div>
-      );
-    }
-  };
+      </div>
+    );
+  }
+};
