@@ -15,8 +15,6 @@ export class Home extends React.Component {
     this.state = {
       searchTerm: null,
     };
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
   }
 
   getInitialState() {
@@ -34,38 +32,19 @@ export class Home extends React.Component {
     this.setState({ searchTerm: e.target.value });
   }
 
-  logout() {
-    auth.signOut()
-    .then(() => {
-      this.setState({
-        user: null
-      });
-    });
-  }
-  login() {
-    auth.signInWithPopup(provider) 
-      .then((result) => {
-        const user = result.user;
-        this.setState({
-          user
-        });
-      });
-  }
 
-  componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      } 
-    });
-  }
+
 
   render() {
     return (
       <div>
 
 
-        <Newnav />
+        <Newnav 
+        user={this.props.user}
+        onClickLogin={this.props.onClickLogin}
+        onClickLogout={this.props.onClickLogout}
+        />
 
 
 
@@ -100,10 +79,15 @@ export class Home extends React.Component {
           <div className="row mt-2">
             <div className="col-3"></div>
             <div className="col-6 text-center">
-            {this.state.user ?
-              <button type="button" className="btn btn-danger btn-lg mx-1" onClick={this.logout}>Log Out</button>
+            {this.props.user ?
+            <div>
+              <button type="button" className="btn btn-danger btn-lg mx-1" onClick={this.props.onClickLogout}>Log Out</button>
+              </div>
               :
-              <button type="button" className="btn btn-info btn-lg mx-1" onClick={this.login}>Log In</button>
+              <div>
+              <button type="button" className="btn btn-info btn-lg mx-1" onClick={this.props.onClickLogin}>Log In</button>
+              <p className="text-danger">You have been logged out</p>
+              </div>
             }
             </div>
             <div className="col-3"></div>

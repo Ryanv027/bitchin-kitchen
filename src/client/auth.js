@@ -11,7 +11,7 @@ export const doCreateUserWithEmailAndPassword = (email, password) =>
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.GithubAuthProvider.PROVIDER_ID
     ],
-    // Other config options...
+    signInSuccessUrl: '/dashboard',
   });
 
 // Initialize the FirebaseUI Widget using Firebase.
