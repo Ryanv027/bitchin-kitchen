@@ -64,19 +64,23 @@ export default class RecipeScroller extends React.Component {
         const position = document.getElementById('scrollboxId').scrollTop
         console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
         if(position > (this.state.startingPosition)){
-            this.setState((prevState) => ({ startingPosition: prevState.startingPosition + 780 }));
+            this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (780 * 1.8)}));
             let url = `/api/recipe-search/${this.state.choice}/${this.state.page}`
-            let recipes = this.state.data
+            let currentRecipes = []
             fetch(url)
                 .then(response => {
                     return response.json(); 
                 }).then(data => {
+                    console.log(data)
                     for(let i =0; i < 10; i++){
-                        recipes.push(data[i])
+                        if(data[i].recipeName !== undefined){
+                        currentRecipes.push(data[i])
+                        }
                     }
-                    if(recipes.length > this.state.data.length -1){
+                    console.log(currentRecipes.length)
+                    if(currentRecipes.length > 9){
                         this.setState(prevState => ({
-                            data: recipes,
+                            data: prevState.data.concat(currentRecipes) ,
                             page: prevState.page + 1
                         }))
                     }
