@@ -3,6 +3,9 @@ import { Logo } from './Logo'
 import { Userstatus } from './Userstatus';
 
 export class Newnav extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -35,7 +38,11 @@ export class Newnav extends React.Component {
           </form>
           
         </div>
-        <Userstatus />
+        <Userstatus 
+        user={this.props.user}
+        onClickLogin={this.props.onClickLogin}
+        onClickLogout={this.props.onClickLogout}
+        />
       </nav>
 
     );

@@ -5,6 +5,9 @@ import { Search } from './components/Search'
 import { Logo } from './components/Logo'
 import { Newnav } from './components/Newnav'
 import './new.css';
+import firebase, { auth, provider } from './firebase.js';
+import firebaseui from 'firebaseui';
+import 'firebase/auth';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -29,12 +32,19 @@ export class Home extends React.Component {
     this.setState({ searchTerm: e.target.value });
   }
 
+
+
+
   render() {
     return (
       <div>
 
 
-        <Newnav />
+        <Newnav 
+        user={this.props.user}
+        onClickLogin={this.props.onClickLogin}
+        onClickLogout={this.props.onClickLogout}
+        />
 
 
 
@@ -69,8 +79,16 @@ export class Home extends React.Component {
           <div className="row mt-2">
             <div className="col-3"></div>
             <div className="col-6 text-center">
-              <button type="button" className="btn btn-danger btn-lg mx-1">Join Today!</button>
-              <button type="button" className="btn btn-info btn-lg mx-1">Log In</button>
+            {this.props.user ?
+            <div>
+              <button type="button" className="btn btn-danger btn-lg mx-1" onClick={this.props.onClickLogout}>Log Out</button>
+              </div>
+              :
+              <div>
+              <button type="button" className="btn btn-info btn-lg mx-1" onClick={this.props.onClickLogin}>Log In</button>
+              <p className="text-danger">You have been logged out</p>
+              </div>
+            }
             </div>
             <div className="col-3"></div>
           </div>
