@@ -23,7 +23,6 @@ export default class Recipe extends React.Component {
         return (
             <div> 
                 {this.props.recipes.length > 0 && list}
-                {this.props.recipes.length > 0 && <button onClick={this.props.paginationCall}>More</button>}
             </div>
         )
     }
