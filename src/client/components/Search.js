@@ -1,11 +1,13 @@
 import React from 'react';
 export class Search extends React.Component {
+
     render() {
         return (
-            <div className="col-4">
-            <div id="search" className="Search">
-                <input onKeyUp={this.props.handleKeyUp} onChange={this.props.handleChange} type="search" placeholder="Search for a recipe..." value={this.props.searchTerm} />
-            </div>
+            <div className="input-group mb-3">
+                <input type="search" value={this.props.searchTerm} onChange={this.props.onChange} className="form-control" placeholder="Search Recipes" aria-label="Search Recipes" aria-describedby="basic-addon2" />
+                <div className="input-group-append">
+                    <button onSubmit={this.props.onSubmit} className="btn btn-outline-secondary" type="submit">Go</button>
+                </div>
             </div>
         )
     }
