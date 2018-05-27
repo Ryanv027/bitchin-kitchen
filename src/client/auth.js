@@ -1,8 +1,5 @@
 import { auth } from './firebase';
 
-// Sign Up
-export const doCreateUserWithEmailAndPassword = (email, password) =>
-  auth.createUserWithEmailAndPassword(email, password);
 
 //Official Documentation:
 
@@ -11,7 +8,7 @@ export const doCreateUserWithEmailAndPassword = (email, password) =>
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.GithubAuthProvider.PROVIDER_ID
     ],
-    signInSuccessUrl: '/dashboard',
+    signInSuccessUrl: '/user',
   });
 
 // Initialize the FirebaseUI Widget using Firebase.
