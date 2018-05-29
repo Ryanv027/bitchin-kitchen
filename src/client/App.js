@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Home } from './Home';
 import User from './User';
 import firebase, { auth, provider } from './firebase.js';
 import * as firebaseui from 'firebaseui'
 import 'firebase/auth';
-import { apiRoutes } from '../../api/yummly.js';
 
 var uiConfig = {
   signInSuccessUrl: '/user',
@@ -24,7 +23,9 @@ export default class App extends Component {
       welcome: null,
       username: '',
       user: null,
-      searchTerm: ''
+      searchTerm: '',
+      recipeQuery: '',
+      searchRedirect: false,
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -51,16 +52,6 @@ export default class App extends Component {
       });
   }
 
-  // login() {
-  //  ui.start('#firebaseui-auth-container', uiConfig)
-  //      .then((result) => {
-  //       const user = result.user;
-  //       this.setState({
-  //         user
-  //       });
-  //     });
-  // }
-
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -70,10 +61,8 @@ export default class App extends Component {
   }
 
   handleSubmit(event) {
-    if (this.state.searchTerm !== '') {
-      event.preventDefault()
-      apiRoutes.pagination(this.searchTerm)
-    }
+    console.log('fired', this.state.searchTerm);
+    this.setState({ recipeQuery: this.state.searchTerm, searchRedirect: true });
   }
 
   handleChange(event) {
@@ -81,10 +70,22 @@ export default class App extends Component {
   }
 
   render() {
+    console.log(this.state.searchRedirect);
     return (
       <HashRouter>
         <Switch>
-          <Route path='/user' component={User} />
+          <Route path='/user'
+          render={(routeProps) => (<User {...routeProps}
+            user={this.state.user}
+            searchTerm={this.state.searchTerm}
+            recipeQuery={this.state.recipeQuery}
+            onClickLogin={this.login = this.login.bind(this)}
+            onClickLogout={this.logout = this.logout.bind(this)}
+            onChange={this.handleChange = this.handleChange.bind(this)}
+            onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+          />
+          )}
+          />
           <Route
             exact path='/'
             render={(routeProps) => (<Home {...routeProps}
@@ -97,6 +98,22 @@ export default class App extends Component {
             />
             )}
           />
+          {/* NOT SURE IF THIS IS CLOSE, REDIRECT NEEDS MAJOR WORK! */}
+          <Route exact path='/' render={(routeProps) => (
+            this.state.searchRedirect ? (
+              <Redirect from="/" to="/user"/>
+            ) : (
+              <Home {...routeProps}
+              user={this.state.user}
+              searchTerm={this.state.searchTerm}
+              onClickLogin={this.login = this.login.bind(this)}
+              onClickLogout={this.logout = this.logout.bind(this)}
+              onChange={this.handleChange = this.handleChange.bind(this)}
+              onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+            />
+          )
+          )}/>
+          {/* END REDIRECT */}
           {/* <Route exact path = '/about' component = {About}/> */}
         </Switch>
       </HashRouter>

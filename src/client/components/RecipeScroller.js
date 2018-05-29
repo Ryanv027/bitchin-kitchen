@@ -8,12 +8,15 @@ export default class RecipeScroller extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-        data: [],    
-        page: 1,
-        choice: 'sushi',
-        selectedRecipe: false,
-        startingPosition: 780
+            data: [],    
+            page: 1,
+            choice: (this.props.recipeQuery) ? this.props.recipeQuery : 'sushi',
+            selectedRecipe: false,
+            startingPosition: 780,
+            searchTerm: '',
+            recipeQuery: '',
         }
+        console.log(this.props.recipeQuery);
         this.handleModal = this.handleModal.bind(this);
         this.handleRecipe = this.handleRecipe.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
@@ -22,10 +25,26 @@ export default class RecipeScroller extends React.Component {
         
     }
     componentDidMount(){
-
-        let url = `/api/recipe-search/${this.state.choice}/${this.state.page}`
+        this.searchRecipes()
+    }
+    componentDidUpdate( prevProps, prevState, snapshot){
+        if(prevProps.recipeQuery === this.props.recipeQuery) return;
+        this.searchRecipes();
+    }   
+    searchRecipes( ){
+        console.log( 'yummly query: ', this.props.recipeQuery);
+        let choice;
+        if(this.props.recipeQuery){
+             choice = this.props.recipeQuery;
+             this.state.choice = this.props.recipeQuery;
+        }else{
+            choice = this.state.choice;
+        }
+        // another case where you could have made things a litle more DRY
+        console.log(choice);
+        let url = `/api/recipe-search/${choice}/${this.state.page}`
         let recipes = []
-        
+        console.log(url);
         fetch(url)
             .then(response => {
                 return response.json();
@@ -45,7 +64,7 @@ export default class RecipeScroller extends React.Component {
             }).catch(error => {
                 console.log(error)
         })
-    }   
+    }
     handleRecipe(id){
         let url = `/api/get-recipe/${id}`
         fetch(url)
@@ -65,19 +84,22 @@ export default class RecipeScroller extends React.Component {
         console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
         if(position > (this.state.startingPosition)){
             this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (780 * 1.8)}));
+            // @ryan this should have been more modular, there should have been a single call to api function that various
+            // methods would then interact with. Basically this is all awesome, it just needs to be DRY
             let url = `/api/recipe-search/${this.state.choice}/${this.state.page}`
+            console.log(url);
             let currentRecipes = []
             fetch(url)
                 .then(response => {
                     return response.json(); 
                 }).then(data => {
-                    console.log(data)
+                    // console.log('recipe data: ', data)
                     for(let i =0; i < 10; i++){
                         if(data[i].recipeName !== undefined){
                         currentRecipes.push(data[i])
                         }
                     }
-                    console.log(currentRecipes.length)
+                    // console.log(currentRecipes.length)
                     if(currentRecipes.length > 9){
                         this.setState(prevState => ({
                             data: prevState.data.concat(currentRecipes) ,
@@ -89,7 +111,10 @@ export default class RecipeScroller extends React.Component {
                 }) 
         }
     }
-    render(){
+    handleSearch(event){
+
+    }
+    render(){    
        return (
         <div>   
             <div
@@ -101,7 +126,8 @@ export default class RecipeScroller extends React.Component {
                 onScroll={this.handleScroll}
                 >
                     {this.state.data.length > 0 ? 
-                        <Recipe recipes={this.state.data} 
+                        <Recipe 
+                        recipes={this.state.data} 
                         handleRecipe={this.handleRecipe}
                         paginationCall={this.paginationCall}
                         /> : 'Loading Data...'} 

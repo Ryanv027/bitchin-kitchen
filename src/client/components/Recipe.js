@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class Recipe extends React.Component {
     render(){
-        console.log(this.props.recipes)
+        console.log(this.props)
         let list = this.props.recipes.map((recipe) => {
             return (
                 <div key={Math.random()} className='col-10 m-auto'>
