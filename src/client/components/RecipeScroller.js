@@ -16,7 +16,7 @@ export default class RecipeScroller extends React.Component {
             searchTerm: '',
             recipeQuery: '',
         }
-        console.log(this.props.recipeQuery);
+        //console.log(this.props.recipeQuery);
         this.handleModal = this.handleModal.bind(this);
         this.handleRecipe = this.handleRecipe.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
@@ -32,7 +32,7 @@ export default class RecipeScroller extends React.Component {
         this.searchRecipes();
     }   
     searchRecipes( ){
-        console.log( 'yummly query: ', this.props.recipeQuery);
+        //console.log( 'yummly query: ', this.props.recipeQuery);
         let choice;
         if(this.props.recipeQuery){
              choice = this.props.recipeQuery;
@@ -41,10 +41,10 @@ export default class RecipeScroller extends React.Component {
             choice = this.state.choice;
         }
         // another case where you could have made things a litle more DRY
-        console.log(choice);
+        //console.log(choice);
         let url = `/api/recipe-search/${choice}/${this.state.page}`
         let recipes = []
-        console.log(url);
+        //console.log(url);
         fetch(url)
             .then(response => {
                 return response.json();
@@ -132,6 +132,7 @@ export default class RecipeScroller extends React.Component {
                         handleRecipe={this.handleRecipe}
                         paginationCall={this.paginationCall}
                         handleStar={this.props.handleStar}
+                        color={this.props.color}
                         />
                         : 'Loading Data...'} 
                 </div>

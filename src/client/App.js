@@ -26,11 +26,13 @@ export default class App extends Component {
       searchTerm: '',
       recipeQuery: '',
       searchRedirect: false,
+      color: 'fav'
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleStar = this.handleStar.bind(this);
   }
 
   logout() {
@@ -91,16 +93,17 @@ export default class App extends Component {
   }
 
   handleSubmit(event) {
-    console.log('fired', this.state.searchTerm);
     this.setState({ recipeQuery: this.state.searchTerm, searchRedirect: true });
   }
 
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
-
+  handleStar(e){
+    this.setState( { color: e })
+    //user.fuid
+  }
   render() {
-    console.log(this.state.searchRedirect);
     return (
       <HashRouter>
         <Switch>
@@ -113,6 +116,8 @@ export default class App extends Component {
             onClickLogout={this.logout = this.logout.bind(this)}
             onChange={this.handleChange = this.handleChange.bind(this)}
             onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+            handleStar={this.handleStar}
+            color={this.state.color}
           />
           )}
           />
