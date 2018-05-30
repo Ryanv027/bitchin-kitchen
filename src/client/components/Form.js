@@ -1,50 +1,97 @@
 import React from 'react'
 
-//one more note
-//Crashes the site when object is loaded. 
-// recipe ={
-//     recipe-name: this.recipe-name,
-//     ingredients: this.ingredients,
-//     directions: this.directions, 
-//     created-by: this.created-by,
-//     image: this.img,
-//     recipe-url: this.recipe-url,
-// }
+export class Form extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            chef: '',
+            recipe_name: '',
+            ingredients: '',
+            image_url: '',
+            recipe_url: '' 
+        };
+        this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
 
-export default class Form extends React.Component {
+      handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value,
+            chef: this.props.user.uid
+        });
+      }
+    
+      handleChange(event) {
+        this.setState({value: event.target.value});
+      }
+    
+      handleSubmit(event) {
+        event.preventDefault()
+        let recipe_data = JSON.stringify(this.state)
+        fetch('/api/create-recipe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: recipe_data
+        })
+        this.setState({
+            chef: '',
+            recipe_name: '',
+            ingredients: '',
+            image_url: '',
+            recipe_url: ''
+            })
+    };
+
     render (){
         return(
-            <div class = "container">
+            <div className= "container">
             <div id="create-form">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                 <h3>Create a new recipe</h3>
                 <br/>
                 <div>
                 Recipe Name<br/>
-                <input type = "text" name= "recipe-name"/>
+                <input 
+                type = "text" 
+                name="recipe_name"
+                value={this.state.recipe_name}
+                onChange={this.handleInputChange} />
                 </div>
                 <div>
                 Ingredients<br/>
-                <textarea class="form-control" id="ingredients" rows="6"></textarea>
+                <textarea 
+                className="form-control" 
+                id="ingredients" 
+                rows="6" 
+                name="ingredients"
+                value={this.state.ingredients}
+                onChange={this.handleInputChange}></textarea>
                 </div>
                 <div>
-                Directions<br/>
-                <textarea class="form-control" id="directions" rows="6"></textarea>
-                </div>
-                <div>
-                Created by<br/>
-                <input type = "text" name= "created-by"/>
-                </div>
-                <div>
-                Image<br/>
-                <input type="file" name="img"/>
+                Image URL<br/>
+                <input 
+                type="url" 
+                name="image_url"
+                value={this.state.image_url} 
+                onChange={this.handleInputChange} />
                 </div>
                 <div>
                 Recipe URL<br/>
-                <input type="url" name="recipe-url"/>
+                <input 
+                type="url" 
+                name="recipe_url"
+                value={this.state.recipe_url}
+                onChange={this.handleInputChange} />
                 </div>
                 <br/>
-                <input type="submit" value="Submit"/>
+                <input className= "btn btn-primary" type="submit" value="Submit"/>
                 </form>
             </div>
             </div>

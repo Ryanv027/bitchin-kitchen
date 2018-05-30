@@ -1,5 +1,6 @@
 import React from 'react';
 import { Newnav } from './components/Newnav'
+import { Form } from './components/Form'
 import './new.css';
 
 export class Create extends React.Component {
@@ -25,7 +26,14 @@ export class Create extends React.Component {
               <h1 className="text-center">Welcome to Bitchin Kitchen</h1>
               <h3 className="text-center">Making Your Meal Prep Easy!</h3>
 
-                {/* Form Component Goes Here! */}
+                <Form 
+                user={this.props.user}
+                onClickLogin={this.props.onClickLogin}
+                onClickLogout={this.props.onClickLogout}
+                searchTerm={this.props.searchTerm}
+                onChange={this.props.onChange}
+                onSubmit={this.props.onSubmit}
+                />
 
             </div>
         </div>
