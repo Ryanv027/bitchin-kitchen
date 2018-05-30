@@ -1,7 +1,7 @@
 INSERT INTO users ("user_name", "birthday", "email", "bio", "createdAt", "updatedAt") VALUES
-('Josh Horowitz', '01/02/1980', 'jhorowitz@gmail.com', 'I am a cowboy', now(), now()),
-('Ryan Reynolds', '03/15/1975', 'deadpool@gmail.com', 'I am deadpoop', now(), now()),
-('Logan Paul', '12/15/1990', 'lpaul@douche.com', 'I am a douche', now(), now());
+('Josh Horowitz', 'jhorowitz@gmail.com', 'I am a cowboy', now(), now()),
+('Ryan Reynolds', 'deadpool@gmail.com', 'I am deadpoop', now(), now()),
+('Logan Paul', 'lpaul@douche.com', 'I am a douche', now(), now());
 
 INSERT INTO comments ("title", "comment_text", "createdAt", "updatedAt") VALUES
 ('How I met your mother...', 'I met her at a grungy bar', now(), now()),
