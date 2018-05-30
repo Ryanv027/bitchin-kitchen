@@ -114,8 +114,12 @@ export default class App extends Component {
       this.setState(prevState => ({
         favorites: prevState.favorites.concat(recipe)
       }));
+      favoritesToDatabase(recipe)
     }
     //user.fuid
+  }
+  favoritesToDatabase(recipe){
+
   }
   removeStar(recipe){
     console.log('remove hit')
