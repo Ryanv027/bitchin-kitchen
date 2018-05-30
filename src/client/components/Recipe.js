@@ -29,7 +29,7 @@ export default class Recipe extends React.Component {
                             
                             {`Rating: ${recipe.rating}`}
                             </p>
-                            <p className='col-3 favHolder'><span onClick={(e) => this.props.handleStar(recipe.id)} className='selected'>★</span></p>
+                            <p className='col-3 favHolder'><span onClick={(e) => this.props.handleStar(recipe.id)} className='fav'>★</span></p>
                         </div>
                     </div> 
                 </div>
