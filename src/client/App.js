@@ -5,6 +5,8 @@ import User from './User';
 import firebase, { auth, provider } from './firebase.js';
 import * as firebaseui from 'firebaseui'
 import 'firebase/auth';
+import { Create } from './Create';
+import { Favorites } from './Favorites';
 
 var uiConfig = {
   signInSuccessUrl: '/user',
@@ -48,7 +50,7 @@ export default class App extends Component {
     auth.signInWithPopup(provider) 
       .then((result) => {
         const user = result.user;
-
+        window.location = '/#/user'
         let user_data = JSON.stringify({
           // photo: ,
           bio: user.photoURL,
@@ -75,6 +77,9 @@ export default class App extends Component {
                 user
               });
             }
+            
+        }).then(()=> {
+          window.location.href = "/#/user"
         }).catch(error => {
             console.log(error)
         });
@@ -99,10 +104,18 @@ export default class App extends Component {
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
+<<<<<<< HEAD
   handleStar(e){
     this.setState( { color: e })
     //user.fuid
   }
+=======
+
+  handleCreate(event) {
+    
+  }
+
+>>>>>>> master
   render() {
     return (
       <HashRouter>
@@ -133,12 +146,9 @@ export default class App extends Component {
             />
             )}
           />
-          {/* NOT SURE IF THIS IS CLOSE, REDIRECT NEEDS MAJOR WORK! */}
-          <Route exact path='/' render={(routeProps) => (
-            this.state.searchRedirect ? (
-              <Redirect from="/" to="/user"/>
-            ) : (
-              <Home {...routeProps}
+          <Route
+            exact path='/create'
+            render={(routeProps) => (<Create {...routeProps}
               user={this.state.user}
               searchTerm={this.state.searchTerm}
               onClickLogin={this.login = this.login.bind(this)}
@@ -146,10 +156,21 @@ export default class App extends Component {
               onChange={this.handleChange = this.handleChange.bind(this)}
               onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
             />
-          )
-          )}/>
-          {/* END REDIRECT */}
-          {/* <Route exact path = '/about' component = {About}/> */}
+            )}
+          />
+          <Route
+            exact path='/favorites'
+            render={(routeProps) => (<Favorites {...routeProps}
+              user={this.state.user}
+              searchTerm={this.state.searchTerm}
+              onClickLogin={this.login = this.login.bind(this)}
+              onClickLogout={this.logout = this.logout.bind(this)}
+              onChange={this.handleChange = this.handleChange.bind(this)}
+              onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+            />
+            )}
+          />
+         
         </Switch>
       </HashRouter>
     );
