@@ -8,6 +8,7 @@ import './new.css';
 import firebase, { auth, provider } from './firebase.js';
 import firebaseui from 'firebaseui';
 import 'firebase/auth';
+import Form from './components/Form'
 
 export class Home extends React.Component {
 
