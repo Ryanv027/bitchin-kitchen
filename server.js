@@ -20,7 +20,8 @@ app.use(express.static("public"));
 
 
 // Routes go Here
-require("./routes/routes")(app);
+require("./routes/recipe-routes")(app);
+require("./routes/user-routes")(app);
 // require("./routes/react-route.js")(app);
 
 

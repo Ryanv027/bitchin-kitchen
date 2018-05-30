@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Home } from './Home';
-import { Create } from './Create';
-import { Favorites } from './Favorites'
 import User from './User';
 import firebase, { auth, provider } from './firebase.js';
 import * as firebaseui from 'firebaseui'
 import 'firebase/auth';
-import PrivateRoute from './PrivateRoute.js'
+
+var uiConfig = {
+  signInSuccessUrl: '/user',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID
+  ],
+};
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 export default class App extends Component {
   constructor(props) {
@@ -39,11 +46,40 @@ export default class App extends Component {
     auth.signInWithPopup(provider) 
       .then((result) => {
         const user = result.user;
-        window.location = '/#/user'
-        this.setState({
-          user
+
+        let user_data = JSON.stringify({
+          // photo: ,
+          bio: user.photoURL,
+          email: user.email,
+          birthday: '',
+          user_name: user.displayName,
+          fuid: user.uid,
         });
-      }).then;
+
+        console.log(user);
+
+        fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: user_data
+        })
+        .then(response => {
+            return response.json();
+        }).then(newUser => {
+            if(newUser){
+              this.setState({
+                user
+              });
+            }
+        }).catch(error => {
+            console.log(error)
+        });
+
+        
+
+      });
   }
 
   componentDidMount() {
@@ -68,9 +104,7 @@ export default class App extends Component {
     return (
       <HashRouter>
         <Switch>
-          {/* <PrivateRoute path='/user' component={User} /> */}
-          <Route
-          path='/user'
+          <Route path='/user'
           render={(routeProps) => (<User {...routeProps}
             user={this.state.user}
             searchTerm={this.state.searchTerm}
@@ -80,9 +114,8 @@ export default class App extends Component {
             onChange={this.handleChange = this.handleChange.bind(this)}
             onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
           />
-          )}  
+          )}
           />
-
           <Route
             exact path='/'
             render={(routeProps) => (<Home {...routeProps}
@@ -95,39 +128,10 @@ export default class App extends Component {
             />
             )}
           />
-
-
-          <Route
-            exact path='/create'
-            render={(routeProps) => (<Create {...routeProps}
-              user={this.state.user}
-              searchTerm={this.state.searchTerm}
-              onClickLogin={this.login = this.login.bind(this)}
-              onClickLogout={this.logout = this.logout.bind(this)}
-              onChange={this.handleChange = this.handleChange.bind(this)}
-              onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
-            />
-            )}
-          />
-
-          <Route
-            exact path='/favorites'
-            render={(routeProps) => (<Favorites {...routeProps}
-              user={this.state.user}
-              searchTerm={this.state.searchTerm}
-              onClickLogin={this.login = this.login.bind(this)}
-              onClickLogout={this.logout = this.logout.bind(this)}
-              onChange={this.handleChange = this.handleChange.bind(this)}
-              onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
-            />
-            )}
-          />
-
-
           {/* NOT SURE IF THIS IS CLOSE, REDIRECT NEEDS MAJOR WORK! */}
           <Route exact path='/' render={(routeProps) => (
-            this.state.user ? (
-              <Redirect to="/user"/>
+            this.state.searchRedirect ? (
+              <Redirect from="/" to="/user"/>
             ) : (
               <Home {...routeProps}
               user={this.state.user}
