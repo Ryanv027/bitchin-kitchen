@@ -176,6 +176,7 @@ export default class App extends Component {
             render={(routeProps) => (<Favorites {...routeProps}
               user={this.state.user}
               searchTerm={this.state.searchTerm}
+              recipeQuery={this.state.recipeQuery}
               onClickLogin={this.login = this.login.bind(this)}
               onClickLogout={this.logout = this.logout.bind(this)}
               onChange={this.handleChange = this.handleChange.bind(this)}
