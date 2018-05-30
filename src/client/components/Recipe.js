@@ -5,23 +5,38 @@ export default class Recipe extends React.Component {
         console.log(this.props)
         let list = this.props.recipes.map((recipe) => {
             return (
-                <div key={Math.random()} className='col-10 m-auto'>
-                        <h1 onClick={(e) => {
+                <div className='recipeHolder col-md-4 col-12'
+                key={Math.random()} >
+                    <div
+                    className='recipes'
+                    >
+                        <h1
+                        className='recipeHeader text-center'
+                        onClick={(e) => {
                             this.props.handleRecipe(recipe.id)
                         }}
-                        className='recipeHeader'
-                        >{recipe.recipeName}</h1>
-                        <img 
-                        src={recipe.smallImageUrls} 
-                        alt={recipe.recipeName} 
-                        height={100}
-                        width={100}
-                        />
-                </div> 
+                        >{recipe.recipeName}
+                        </h1>
+                        <div className="row">
+                            <img 
+                            src={recipe.smallImageUrls} 
+                            alt={recipe.recipeName} 
+                            height={100}
+                            width={120}
+                            className="recipeImage col-6"
+                            />
+                            <p className="recipeSource text-center col-3">
+                            
+                            {`Rating: ${recipe.rating}`}
+                            </p>
+                            <p className='col-3 favHolder'><span onClick={(e) => this.props.handleStar(recipe.id)} className='selected'>★</span></p>
+                        </div>
+                    </div> 
+                </div>
             )
         })
         return (
-            <div> 
+            <div className="row"> 
                 {this.props.recipes.length > 0 && list}
             </div>
         )

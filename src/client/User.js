@@ -18,7 +18,11 @@ export default class User extends React.Component {
                     searchTerm={this.props.searchTerm}
                     onSubmit={this.props.onSubmit}
                 />
-                <RecipeScroller recipeQuery={this.props.recipeQuery} page={1} />
+                <RecipeScroller 
+                recipeQuery={this.props.recipeQuery} 
+                page={1} 
+                handleStar={this.props.handleStar}
+                />
             </div>
         )
     }

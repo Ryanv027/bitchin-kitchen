@@ -12,7 +12,7 @@ export default class RecipeScroller extends React.Component {
             page: 1,
             choice: (this.props.recipeQuery) ? this.props.recipeQuery : 'sushi',
             selectedRecipe: false,
-            startingPosition: 780,
+            startingPosition: 50,
             searchTerm: '',
             recipeQuery: '',
         }
@@ -57,7 +57,8 @@ export default class RecipeScroller extends React.Component {
                 if(recipes.length > 9){
                     this.setState( (prevState) => ({ 
                         data: recipes,
-                        page: prevState.page + 1 
+                        page: prevState.page + 1,
+                        startingPosition: 50
                     }))
         
                 }
@@ -83,7 +84,7 @@ export default class RecipeScroller extends React.Component {
         const position = document.getElementById('scrollboxId').scrollTop
         console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
         if(position > (this.state.startingPosition)){
-            this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (780 * 1.8)}));
+            this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (450)}));
             // @ryan this should have been more modular, there should have been a single call to api function that various
             // methods would then interact with. Basically this is all awesome, it just needs to be DRY
             let url = `/api/recipe-search/${this.state.choice}/${this.state.page}`
@@ -121,7 +122,7 @@ export default class RecipeScroller extends React.Component {
             className='row'
             >  
                 <div 
-                className='scrollBox col-9 m-auto text-center'
+                className='scrollBox col-10 m-auto'
                 id="scrollboxId"
                 onScroll={this.handleScroll}
                 >
@@ -130,7 +131,9 @@ export default class RecipeScroller extends React.Component {
                         recipes={this.state.data} 
                         handleRecipe={this.handleRecipe}
                         paginationCall={this.paginationCall}
-                        /> : 'Loading Data...'} 
+                        handleStar={this.props.handleStar}
+                        />
+                        : 'Loading Data...'} 
                 </div>
             </div>
             <RecipeModal 
