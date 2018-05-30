@@ -9,7 +9,7 @@ export default class User extends React.Component {
         
     }
     render(){
-        console.log( 'User recipeQuery: ', this.props.recipeQuery);
+        //console.log( 'User recipeQuery: ', this.props.recipeQuery);
         return (
             <div>
                 <Newnav 
@@ -22,6 +22,7 @@ export default class User extends React.Component {
                 recipeQuery={this.props.recipeQuery} 
                 page={1} 
                 handleStar={this.props.handleStar}
+                favorites={this.props.favorites}
                 />
             </div>
         )

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=IM+Fell+French+Canon+SC|Inconsolata|Indie+Flower|Noto+Serif|Shadows+Into+Light);html, body, div, span, applet, object, iframe,
+@import url(https://fonts.googleapis.com/css?family=Heebo|Kanit|Passion+One|Ropa+Sans|Vollkorn);html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -6816,7 +6816,7 @@ footer {
   background-color: white; }
 
 .recipeHeader {
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Vollkorn', serif;
   padding: 5px;
   background-color: #626e7b;
   border-bottom: 1px solid #8d8d8d;
@@ -6831,11 +6831,7 @@ footer {
 .recipeSource {
   font-size: 20px;
   padding-top: 15px;
-  font-family: 'Shadows Into Light', cursive;
-  font-weight: bold; }
-
-.recipeRating {
-  display: inline-block; }
+  font-family: 'Kanit', sans-serif; }
 
 #search-submit {
   z-index: 0; }
@@ -6849,7 +6845,8 @@ footer {
 .selected {
   color: #F4B30A;
   text-shadow: 0 0 1px #F48F0A;
-  font-size: 30px; }
+  font-size: 30px;
+  cursor: pointer; }
 
 .favHolder {
   margin-top: 20px; }

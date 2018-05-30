@@ -33,7 +33,7 @@ footer {
 }
 
 .recipeHeader {
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Vollkorn', serif;
   padding: 5px;
   background-color: rgb(98, 110, 123);
   border-bottom: 1px solid rgb(141, 141, 141);
@@ -50,12 +50,9 @@ footer {
 .recipeSource {
   font-size: 20px;
   padding-top: 15px;
-  font-family: 'Shadows Into Light', cursive;
-  font-weight: bold;
-}
-
-.recipeRating {
-  display: inline-block;
+  font-family: 'Kanit', sans-serif;
+  //font-family: 'Play', sans-serif;
+  //font-weight: bold;
 }
 
 #search-submit {
@@ -73,6 +70,7 @@ footer {
   color: #F4B30A;
   text-shadow: 0 0 1px #F48F0A;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .favHolder {
