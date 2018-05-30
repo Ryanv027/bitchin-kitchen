@@ -1,9 +1,20 @@
 import React from 'react';
+import { Navigation } from './components/Navigation'
+import { Userstatus } from './components/Userstatus'
+import { Search } from './components/Search'
+import { Logo } from './components/Logo'
 import { Newnav } from './components/Newnav'
 import './new.css';
-
+import firebase, { auth, provider } from './firebase.js';
+import firebaseui from 'firebaseui';
+import 'firebase/auth';
 
 export class Home extends React.Component {
+
+
+
+
+
   render() {
     return (
       <div>
@@ -15,7 +26,6 @@ export class Home extends React.Component {
           onChange={this.props.onChange}
           onSubmit={this.props.onSubmit}
         />
-        
         <div className="container">
           <div className="row mt-2">
             <div className="col-2"></div>

@@ -28,11 +28,14 @@ export default class App extends Component {
       searchTerm: '',
       recipeQuery: '',
       searchRedirect: false,
+      favorites: []
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleStar = this.handleStar.bind(this);
+    this.removeStar = this.removeStar.bind(this);
   }
 
   logout() {
@@ -96,20 +99,37 @@ export default class App extends Component {
   }
 
   handleSubmit(event) {
-    console.log('fired', this.state.searchTerm);
     this.setState({ recipeQuery: this.state.searchTerm, searchRedirect: true });
   }
 
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
-
-  handleCreate(event) {
-    
+  handleStar(recipe){
+    if(this.state.favorites.indexOf(recipe) !== -1){
+      console.log('if hit')
+      this.removeStar(recipe)
+    } else {
+      console.log('else hit')
+      this.setState(prevState => ({
+        favorites: prevState.favorites.concat(recipe)
+      }));
+    }
+    //user.fuid
   }
-
+  removeStar(recipe){
+    console.log('remove hit')
+    let recipeLocation = this.state.favorites.indexOf(recipe)
+    console.log(recipeLocation)
+    let favorites = this.state.favorites
+    console.log(favorites)
+    let newFavorites = favorites.filter((index) => {
+      return index !== recipe
+    })
+    console.log(newFavorites)
+    this.setState({ favorites: newFavorites })
+  }
   render() {
-    console.log(this.state.searchRedirect);
     return (
       <HashRouter>
         <Switch>
@@ -122,6 +142,8 @@ export default class App extends Component {
             onClickLogout={this.logout = this.logout.bind(this)}
             onChange={this.handleChange = this.handleChange.bind(this)}
             onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+            handleStar={this.handleStar}
+            favorites={this.state.favorites}
           />
           )}
           />
