@@ -132,7 +132,7 @@ export default class RecipeScroller extends React.Component {
                         handleRecipe={this.handleRecipe}
                         paginationCall={this.paginationCall}
                         handleStar={this.props.handleStar}
-                        color={this.props.color}
+                        favorites={this.props.favorites}
                         />
                         : 'Loading Data...'} 
                 </div>

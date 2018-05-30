@@ -7,7 +7,7 @@ export default class Recipe extends React.Component {
         this.handleToggle = this.handleToggle.bind(this)
     }
     handleToggle(e){
-        console.log(e)
+        //console.log(e)
     }
     render(){
         let list = this.props.recipes.map((recipe) => {
@@ -37,11 +37,11 @@ export default class Recipe extends React.Component {
                             {`Rating: ${recipe.rating}`}
                             </p>
                             <p 
-                                className={`col-3 favHolder ${this.props.color === recipe.id ? 'selected' : 'fav'}`}
+                                className={`col-3 favHolder ${this.props.favorites.indexOf(recipe.id) !== -1 ? 'selected' : 'fav'}`}
                                 onClick={(e) => {
                                 this.props.handleStar(recipe.id)
                                 this.handleToggle(this)
-                                console.log(this)
+                                //console.log(this)
                             }}>
                             ★</p>
                         </div>

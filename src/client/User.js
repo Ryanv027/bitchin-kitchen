@@ -22,7 +22,7 @@ export default class User extends React.Component {
                 recipeQuery={this.props.recipeQuery} 
                 page={1} 
                 handleStar={this.props.handleStar}
-                color={this.props.color}
+                favorites={this.props.favorites}
                 />
             </div>
         )

@@ -28,13 +28,14 @@ export default class App extends Component {
       searchTerm: '',
       recipeQuery: '',
       searchRedirect: false,
-      color: 'fav'
+      favorites: []
     };
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleStar = this.handleStar.bind(this);
+    this.removeStar = this.removeStar.bind(this);
   }
 
   logout() {
@@ -104,18 +105,30 @@ export default class App extends Component {
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
-<<<<<<< HEAD
-  handleStar(e){
-    this.setState( { color: e })
+  handleStar(recipe){
+    if(this.state.favorites.indexOf(recipe) !== -1){
+      console.log('if hit')
+      this.removeStar(recipe)
+    } else {
+      console.log('else hit')
+      this.setState(prevState => ({
+        favorites: prevState.favorites.concat(recipe)
+      }));
+    }
     //user.fuid
   }
-=======
-
-  handleCreate(event) {
-    
+  removeStar(recipe){
+    console.log('remove hit')
+    let recipeLocation = this.state.favorites.indexOf(recipe)
+    console.log(recipeLocation)
+    let favorites = this.state.favorites
+    console.log(favorites)
+    let newFavorites = favorites.filter((index) => {
+      return index !== recipe
+    })
+    console.log(newFavorites)
+    this.setState({ favorites: newFavorites })
   }
-
->>>>>>> master
   render() {
     return (
       <HashRouter>
@@ -130,7 +143,7 @@ export default class App extends Component {
             onChange={this.handleChange = this.handleChange.bind(this)}
             onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
             handleStar={this.handleStar}
-            color={this.state.color}
+            favorites={this.state.favorites}
           />
           )}
           />
