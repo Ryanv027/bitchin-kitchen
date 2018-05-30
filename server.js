@@ -23,6 +23,7 @@ app.use(express.static("public"));
 require("./routes/recipe-routes")(app);
 require("./routes/user-routes")(app);
 require("./routes/create-routes")(app);
+require("./routes/fav-routes")(app);
 // require("./routes/react-route.js")(app);
 
 
