@@ -5,7 +5,7 @@ require('dotenv').config();
 const cmd = require('node-cmd');
 
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8081;
 var DB_USER = process.env.RDS_USERNAME
 var DB_NAME = process.env.RDS_DB_NAME
 
