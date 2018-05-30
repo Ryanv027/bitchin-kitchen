@@ -24,6 +24,7 @@ export default class App extends Component {
     this.logout = this.logout.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleStar = this.handleStar.bind(this);
   }
 
   logout() {
@@ -62,6 +63,10 @@ export default class App extends Component {
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
+  handleStar(e) {
+    console.log('hit')
+    console.log(e)
+  }
 
   render() {
     console.log(this.state.searchRedirect);
@@ -77,6 +82,7 @@ export default class App extends Component {
             recipeQuery={this.state.recipeQuery}
             onClickLogin={this.login = this.login.bind(this)}
             onClickLogout={this.logout = this.logout.bind(this)}
+            handleStar={this.handleStar}
             onChange={this.handleChange = this.handleChange.bind(this)}
             onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
           />
@@ -127,7 +133,7 @@ export default class App extends Component {
           {/* NOT SURE IF THIS IS CLOSE, REDIRECT NEEDS MAJOR WORK! */}
           <Route exact path='/' render={(routeProps) => (
             this.state.user ? (
-              <Redirect to="/user"/>
+              <Redirect from="/" to="/user"/>
             ) : (
               <Home {...routeProps}
               user={this.state.user}

@@ -1,4 +1,4 @@
-html, body, div, span, applet, object, iframe,
+@import url(https://fonts.googleapis.com/css?family=IM+Fell+French+Canon+SC|Inconsolata|Indie+Flower|Noto+Serif|Shadows+Into+Light);html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -6805,7 +6805,54 @@ footer {
 .scrollBox {
   width: 400px;
   height: 400px;
-  overflow: scroll; }
+  overflow: scroll;
+  border: 1px solid black; }
+
+.recipes {
+  border: 1px solid black;
+  height: 161px;
+  overflow: scroll;
+  padding: 0px;
+  background-color: white; }
+
+.recipeHeader {
+  font-family: 'Indie Flower', cursive;
+  padding: 5px;
+  background-color: #626e7b;
+  border-bottom: 1px solid #8d8d8d;
+  margin: 0px;
+  color: white;
+  cursor: pointer; }
+
+.recipeHolder {
+  margin-top: 5px;
+  margin-bottom: 5px; }
+
+.recipeSource {
+  font-size: 20px;
+  padding-top: 15px;
+  font-family: 'Shadows Into Light', cursive;
+  font-weight: bold; }
+
+.recipeRating {
+  display: inline-block; }
+
+#search-submit {
+  z-index: 0; }
+
+.fav {
+  color: #F0F0F0;
+  text-shadow: 0 0 1px #666666;
+  font-size: 30px;
+  cursor: pointer; }
+
+.selected {
+  color: #F4B30A;
+  text-shadow: 0 0 1px #F48F0A;
+  font-size: 30px; }
+
+.favHolder {
+  margin-top: 20px; }
 
 @font-face {
   font-family: 'montserratlt';
