@@ -46,9 +46,39 @@ export default class App extends Component {
     auth.signInWithPopup(provider) 
       .then((result) => {
         const user = result.user;
-        this.setState({
-          user
+
+        let user_data = JSON.stringify({
+          // photo: ,
+          bio: user.photoURL,
+          email: user.email,
+          birthday: '',
+          user_name: user.displayName,
+          fuid: user.uid,
         });
+
+        console.log(user);
+
+        fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: user_data
+        })
+        .then(response => {
+            return response.json();
+        }).then(newUser => {
+            if(newUser){
+              this.setState({
+                user
+              });
+            }
+        }).catch(error => {
+            console.log(error)
+        });
+
+        
+
       });
   }
 
