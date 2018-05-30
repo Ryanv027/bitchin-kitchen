@@ -17,9 +17,6 @@ export class Create extends React.Component {
           onSubmit={this.props.onSubmit}
         />
 
-
-
-
         <div className="container">
           <div className="row mt-2">
             <div className="col-2"></div>
