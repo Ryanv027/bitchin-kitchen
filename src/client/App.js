@@ -104,6 +104,10 @@ export default class App extends Component {
     this.setState({ searchTerm: event.target.value });
   }
 
+  handleCreate(event) {
+    
+  }
+
   render() {
     console.log(this.state.searchRedirect);
     return (
