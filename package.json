@@ -23,6 +23,7 @@
   "homepage": "https://github.com/rperez2021/bitchin-kitchen#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.1",
     "dotenv": "^5.0.1",
@@ -46,6 +47,7 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",

@@ -100,8 +100,8 @@ export default class App extends Component {
           />
           {/* NOT SURE IF THIS IS CLOSE, REDIRECT NEEDS MAJOR WORK! */}
           <Route exact path='/' render={(routeProps) => (
-            this.state.searchRedirect ? (
-              <Redirect from="/" to="/user"/>
+            this.state.user ? (
+              <Redirect to="/user"/>
             ) : (
               <Home {...routeProps}
               user={this.state.user}
