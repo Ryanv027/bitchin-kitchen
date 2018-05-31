@@ -11,7 +11,7 @@ export class Favorites extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        chef: '',
+        chef: this.props.user.uid,
         data: [],    
         page: 1,
         choice: (this.props.recipeQuery) ? this.props.recipeQuery : 'sushi',
@@ -29,41 +29,33 @@ componentWillReceiveProps(nextProps){
       this.setState({chef:nextProps.user.uid});
   }
 }
+componentDidMount(){
+  this.getFavorites();
+}
 
 componentDidUpdate( prevProps, prevState, snapshot){
     if(prevProps.recipeQuery === this.props.recipeQuery) return;
     this.getFavorites();
 }   
 getFavorites( ){
-    let url = `/api/favorites/${this.state.chef}`
-    let recipes = []
-    console.log(url);
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json', 
-    }
+  console.log('getFavorites in FAVORITES')
+  fetch(`/api/getUserFavorites/${this.state.chef}`)
+  .then(response => {
+    return response.json();
   })
-        .then(response => {
-          console.log(response)
-            return response;
-        }).then(data => {
-            console.log('Data goes here:', data)
-            for(let i = 0; i < 10; i++){
-                recipes.push(data[i])
-            }
-            
-            if(recipes.length > 9){
-                this.setState( (prevState) => ({ 
-                    data: recipes,
-                    page: prevState.page + 1,
-                    startingPosition: 50
-                }))
-    
-            }
-        }).catch(error => {
-            console.log(error)
-    })
+  .then(response => {
+    this.setDataState(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+setDataState(recipes){
+  let data = []
+  for(let i =0; i < recipes.length; i++){
+    data.push(recipes[i])
+  }
+  this.setState({ data })
 }
 handleRecipe(id){
     let url = `/api/get-recipe/${id}`
@@ -95,49 +87,40 @@ handleSearch(event){
             onChange={this.props.onChange}
             onSubmit={this.props.onSubmit}
           />
-          <div className="container">
-            <div className="row mt-2">
-              <div className="col-2"></div>
-              <div className="col-8">
-                <h1 className="text-center">Welcome to Bitchin Kitchen</h1>
-                <h3 className="text-center">Making Your Meal Prep Easy!</h3>
-                <h3 className="text-center">You can view your favorites here!</h3>
-                <div>   
-                  <div
-                  className='row'
-                  >  
-                    <div 
-                      className='col-10 m-auto'
-                      >
-                      {this.state.data.length > 0 ? 
-                      <FavRecipe 
-                      recipes={this.state.data} 
-                      handleRecipe={this.handleRecipe}
-                      handleStar={this.props.handleStar}
-                      />
-                      : 'Loading Data...'} 
-                    </div>
-                  </div>
-                  <FavRecipeModal  
-                  selectedRecipe={this.state.selectedRecipe} 
-                  handleModal={this.handleModal}
-                  />
-                </div>
+          <div
+            className='row'
+            >  
+            <div 
+            className='scrollBox col-10 m-auto'
+            id="scrollboxId"
+            onScroll={this.handleScroll}
+            >
+              {this.state.data.length > 0 ? 
+              <FavRecipe 
+              recipes={this.state.data} 
+              handleRecipe={this.handleRecipe}
+              handleStar={this.props.handleStar}
+              favorites={this.props.favorites}
+              getFavorites={this.getFavorites}
+              />
+              : 
+              <h1 className='text-center mt-5'>You need to go star some items first!</h1>} 
+            </div>
+         </div>
+          <FavRecipeModal  
+          selectedRecipe={this.state.selectedRecipe} 
+          handleModal={this.handleModal}
+          />
+          <footer className="footer">
+            <div className="row m-0">
+              <div className="col-12 pt-3">
+                <p className="text-center">
+                Created by Brian, Kyle, Robert and Ryan in 2018
+                </p>
               </div>
             </div>
-
-            <footer className="footer">
-              <div className="row m-0">
-                <div className="col-12 pt-3">
-                  <p className="text-center">
-                  Created by Brian, Kyle, Robert and Ryan in 2018
-                  </p>
-                </div>
-              </div>
-            </footer>
-
-          </div>
-        </div>
+          </footer>
+      </div>
     )
   }
 }

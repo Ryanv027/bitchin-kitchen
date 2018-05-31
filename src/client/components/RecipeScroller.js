@@ -37,7 +37,7 @@ export default class RecipeScroller extends React.Component {
         }
     }   
     searchRecipes( ){
-        console.log('Search hit')
+        //console.log('Search hit')
         let choice;
         if(this.props.recipeQuery){
              choice = this.props.recipeQuery;
@@ -45,10 +45,10 @@ export default class RecipeScroller extends React.Component {
         }else{
             choice = this.state.choice;
         }
-        console.log(choice)
+        //console.log(choice)
         let url = `/api/recipe-search/${choice}/${this.state.page}`
         let recipes = []
-        console.log(url)
+        //console.log(url)
         fetch(url)
             .then(response => {
                 return response.json();
