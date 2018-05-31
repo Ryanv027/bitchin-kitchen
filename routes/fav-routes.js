@@ -28,6 +28,12 @@ module.exports = function(app){
                 console.log(error)
             })
     })
+    app.get('/api/getUserFavorites/:userid', (req, res) => {
+        db.recipe.findAll({where: {chef: req.params.userid}})
+            .then(recipes => {
+                res.send(recipes)
+            })
+    })
 }
 
                 // db.recipe.create(
