@@ -2,8 +2,11 @@ import React from 'react';
 
 export class FavRecipe extends React.Component {
     render(){
-        console.log(this.props)
+        console.log(this.props.recipes[0])
         let list = this.props.recipes.map((recipe) => {
+            console.log('WHAT THE FUCK')
+            console.log(this.props.favorites)
+            console.log(recipe.recipe_id)
             return (
                 <div className='recipeHolder col-md-4 col-12'
                 key={Math.random()} >
@@ -15,21 +18,23 @@ export class FavRecipe extends React.Component {
                         onClick={(e) => {
                             this.props.handleRecipe(recipe.id)
                         }}
-                        >{recipe.recipeName}
+                        >{recipe.recipe_name}
                         </h1>
                         <div className="row">
                             <img 
-                            src={recipe.smallImageUrls} 
-                            alt={recipe.recipeName} 
+                            src={recipe.image_url} 
+                            alt={recipe.recipe_name} 
                             height={100}
                             width={120}
                             className="recipeImage col-6"
                             />
-                            <p className="recipeSource text-center col-3">
-                            
-                            {`Rating: ${recipe.rating}`}
-                            </p>
-                            <p className='col-3 favHolder'><span onClick={(e) => this.props.handleStar(recipe.id)} className='fav'>★</span></p>
+                            <p 
+                            className={`col-3 favHolder ${this.props.favorites.indexOf(recipe.recipe_id) !== -1 ? 'selected' : 'fav'}`}
+                            onClick={(e) => {
+                            this.props.handleStar(recipe.recipe_id)
+                            this.props.getFavorites
+                        }}>
+                        ★</p>
                         </div>
                     </div> 
                 </div>

@@ -99,7 +99,6 @@ export default class App extends Component {
       });
   }
   getUserFavorites(){
-    console.log("STATE SETTER BABY")
     if(this.state.user !== null){
       console.log('passed inspection')
       fetch(`/api/getUserFavorites/${this.state.user.uid}`)
@@ -255,6 +254,8 @@ export default class App extends Component {
               onClickLogout={this.logout}
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
+              handleStar={this.handleStar}
+              favorites={this.state.favorites}
             />
             )}
           />
