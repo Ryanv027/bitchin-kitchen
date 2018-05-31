@@ -133,10 +133,10 @@ export default class App extends Component {
 
       this.removeStar(recipe)
     } else {
-      // this.favoritesToDatabase(recipe);
       this.setState(prevState => ({
         favorites: prevState.favorites.concat(recipe)
       }));
+      this.favoritesToDatabase(recipe);
     }
     //user.fuid
   }
