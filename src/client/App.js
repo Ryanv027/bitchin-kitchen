@@ -38,6 +38,8 @@ export default class App extends Component {
     this.removeStar = this.removeStar.bind(this);
     this.favoritesToDatabase = this.favoritesToDatabase.bind(this);
     this.deleteFavorites = this.deleteFavorites.bind(this);
+    this.getUserFavorites = this.getUserFavorites.bind(this);
+    this.setFavoriteState = this.setFavoriteState.bind(this);
   }
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
@@ -95,6 +97,30 @@ export default class App extends Component {
           user: null
         });
       });
+  }
+  getUserFavorites(){
+    console.log("STATE SETTER BABY")
+    if(this.state.user !== null){
+      console.log('passed inspection')
+      fetch(`/api/getUserFavorites/${this.state.user.uid}`)
+        .then(response => {
+          return response.json();
+        })
+        .then(response => {
+          this.setFavoriteState(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }    
+  }
+  setFavoriteState(recipes){
+    console.log(recipes)
+    let favs = []
+    for (let i = 0; i < recipes.length; i++) {
+        favs.push(recipes[i].recipe_id)
+    }
+    this.setState({ favorites: favs})
   }
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
@@ -191,6 +217,7 @@ export default class App extends Component {
             onSubmit={this.handleSubmit}
             handleStar={this.handleStar}
             favorites={this.state.favorites}
+            getUserFavorites={this.getUserFavorites}
           />
           )}
           />

@@ -22,6 +22,7 @@ export default class User extends React.Component {
                 page={1} 
                 handleStar={this.props.handleStar}
                 favorites={this.props.favorites}
+                getUserFavorites={this.props.getUserFavorites}
                 />
             </div>
         )

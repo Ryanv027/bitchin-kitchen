@@ -25,12 +25,16 @@ export default class RecipeScroller extends React.Component {
         
     }
     componentDidMount(){
-        this.searchRecipes()
+        this.searchRecipes();
+        this.props.getUserFavorites();
     }
     componentDidUpdate( prevProps, prevState, snapshot){
-        if(prevProps.recipeQuery === this.props.recipeQuery) return;
+        if(prevProps.recipeQuery === this.props.recipeQuery) {
+            return false
+        } else {
         this.setState({ page: 1, startingPosition: 50})
         this.searchRecipes();
+        }
     }   
     searchRecipes( ){
         console.log('Search hit')
