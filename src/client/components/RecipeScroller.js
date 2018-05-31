@@ -10,16 +10,16 @@ export default class RecipeScroller extends React.Component {
         this.state = {
             data: [],    
             page: 1,
-            choice: (this.props.recipeQuery) ? this.props.recipeQuery : 'sushi',
+            choice: (this.props.recipeQuery) ? this.props.recipeQuery : 'pizza',
             selectedRecipe: false,
             startingPosition: 50,
             searchTerm: '',
             recipeQuery: '',
         }
-        //console.log(this.props.recipeQuery);
         this.handleModal = this.handleModal.bind(this);
         this.handleRecipe = this.handleRecipe.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
+        this.scrollRecipes = this.scrollRecipes.bind(this);
     }
     componentWillMount(){
         
@@ -32,7 +32,6 @@ export default class RecipeScroller extends React.Component {
         this.searchRecipes();
     }   
     searchRecipes( ){
-        //console.log( 'yummly query: ', this.props.recipeQuery);
         let choice;
         if(this.props.recipeQuery){
              choice = this.props.recipeQuery;
@@ -40,20 +39,15 @@ export default class RecipeScroller extends React.Component {
         }else{
             choice = this.state.choice;
         }
-        // another case where you could have made things a litle more DRY
-        //console.log(choice);
         let url = `/api/recipe-search/${choice}/${this.state.page}`
         let recipes = []
-        //console.log(url);
         fetch(url)
             .then(response => {
                 return response.json();
             }).then(data => {
-                
                 for(let i = 0; i < 10; i++){
                     recipes.push(data[i])
                 }
-                
                 if(recipes.length > 9){
                     this.setState( (prevState) => ({ 
                         data: recipes,
@@ -82,25 +76,24 @@ export default class RecipeScroller extends React.Component {
     }
     handleScroll(){
         const position = document.getElementById('scrollboxId').scrollTop
-        console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
+        //console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
         if(position > (this.state.startingPosition)){
             this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (450)}));
-            // @ryan this should have been more modular, there should have been a single call to api function that various
-            // methods would then interact with. Basically this is all awesome, it just needs to be DRY
-            let url = `/api/recipe-search/${this.state.choice}/${this.state.page}`
-            console.log(url);
+            this.scrollRecipes();
+        }
+    }
+    scrollRecipes(){
+        let url = `/api/recipe-search/${this.state.choice}/${this.state.page}`
             let currentRecipes = []
             fetch(url)
                 .then(response => {
                     return response.json(); 
                 }).then(data => {
-                    // console.log('recipe data: ', data)
                     for(let i =0; i < 10; i++){
                         if(data[i].recipeName !== undefined){
                         currentRecipes.push(data[i])
                         }
                     }
-                    // console.log(currentRecipes.length)
                     if(currentRecipes.length > 9){
                         this.setState(prevState => ({
                             data: prevState.data.concat(currentRecipes) ,
@@ -110,10 +103,6 @@ export default class RecipeScroller extends React.Component {
                 }).catch(error => {
                     console.log(error)
                 }) 
-        }
-    }
-    handleSearch(event){
-
     }
     render(){    
        return (

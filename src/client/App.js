@@ -36,6 +36,7 @@ export default class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleStar = this.handleStar.bind(this);
     this.removeStar = this.removeStar.bind(this);
+    this.favoritesToDatabase = this.favoritesToDatabase.bind(this);
   }
 
   logout() {
@@ -84,10 +85,28 @@ export default class App extends Component {
         }).catch(error => {
             console.log(error)
         });
-
-        
-
       });
+  }
+  favoritesToDatabase(recipe){
+    console.log('hit favorite')
+    if(this.state.user.uid){
+    fetch('/api/addFavorites', {
+      method: 'POST',
+      headers: {
+       'Content-Type': 'application/json'
+      },
+      body: 
+        JSON.stringify(
+          {recipes: this.state.favorites,
+            fuid: this.state.user.uid
+          })
+      
+    }).then(response => {
+      return response.text();
+    }).then(response => {
+      console.log(response)
+    })
+  }
   }
 
   componentDidMount() {
@@ -96,6 +115,9 @@ export default class App extends Component {
         this.setState({ user });
       }
     });
+  }
+  componentDidUpdate(){
+    
   }
 
   handleSubmit(event) {
@@ -111,15 +133,12 @@ export default class App extends Component {
       this.removeStar(recipe)
     } else {
       console.log('else hit')
+      this.favoritesToDatabase(recipe);
       this.setState(prevState => ({
         favorites: prevState.favorites.concat(recipe)
       }));
-      favoritesToDatabase(recipe)
     }
     //user.fuid
-  }
-  favoritesToDatabase(recipe){
-
   }
   removeStar(recipe){
     console.log('remove hit')
@@ -180,6 +199,7 @@ export default class App extends Component {
             render={(routeProps) => (<Favorites {...routeProps}
               user={this.state.user}
               searchTerm={this.state.searchTerm}
+              recipeQuery={this.state.recipeQuery}
               onClickLogin={this.login = this.login.bind(this)}
               onClickLogout={this.logout = this.logout.bind(this)}
               onChange={this.handleChange = this.handleChange.bind(this)}

@@ -22,8 +22,8 @@ module.exports = function (sequelize, DataTypes) {
     fuid: {
       type: DataTypes.STRING,
       // notNull: true
-    }
-  });
+    },
+    });
 
   user.associate = function (models) {
 
