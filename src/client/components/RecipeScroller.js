@@ -29,6 +29,7 @@ export default class RecipeScroller extends React.Component {
     }
     componentDidUpdate( prevProps, prevState, snapshot){
         if(prevProps.recipeQuery === this.props.recipeQuery) return;
+        this.setState({ page: 1, startingPosition: 50})
         this.searchRecipes();
     }   
     searchRecipes( ){
@@ -54,9 +55,7 @@ export default class RecipeScroller extends React.Component {
                 }
                 if(recipes.length > 9){
                     this.setState( (prevState) => ({ 
-                        data: recipes,
-                        page: 1,
-                        startingPosition: 50
+                        data: recipes
                     }))
         
                 }

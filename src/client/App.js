@@ -37,17 +37,18 @@ export default class App extends Component {
     this.handleStar = this.handleStar.bind(this);
     this.removeStar = this.removeStar.bind(this);
     this.favoritesToDatabase = this.favoritesToDatabase.bind(this);
+    this.deleteFavorites = this.deleteFavorites.bind(this);
   }
-
-  logout() {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null
-        });
-      });
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      }
+    });
   }
-
+  componentDidUpdate(){
+    
+  }
   login() {
     auth.signInWithPopup(provider) 
       .then((result) => {
@@ -87,8 +88,30 @@ export default class App extends Component {
         });
       });
   }
+  logout() {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
+  }
+  handleChange(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
+  handleStar(id, name, image){
+    //console.log(name + ' Handle Star and ' + image)
+    if(this.state.favorites.indexOf(id) !== -1){
+      this.removeStar(id)
+      this.deleteFavorites(id)
+    } else {
+      this.setState(prevState => ({
+        favorites: prevState.favorites.concat(id)
+      }));
+      this.favoritesToDatabase(id, name, image);
+    }
+  }
   favoritesToDatabase(id, name, image){
-    console.log('hit favorite ' + name + ' ' + image )
     if(this.state.user.uid){
     fetch('/api/addFavorites', {
       method: 'POST',
@@ -111,37 +134,36 @@ export default class App extends Component {
   }
   }
 
-  componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      }
-    });
-  }
-  componentDidUpdate(){
-    
-  }
+  deleteFavorites(id){
+    console.log('working delete')
+    if(this.state.user.uid){
+      fetch('api/deleteFavorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: 
+          JSON.stringify(
+            {
+              recipeID: id,
+              fuid: this.state.user.uid
+            }
+          )
+      })
+      .then(response => {
+        return response.text();
+      })
+      .then(response => {
+        console.log(response)
+      })
+    } 
+  } 
 
   handleSubmit(event) {
     console.log('firing')
     this.setState({ recipeQuery: this.state.searchTerm, searchRedirect: true });
   }
 
-  handleChange(event) {
-    this.setState({ searchTerm: event.target.value });
-  }
-  handleStar(id, name, image){
-    console.log(name + ' Handle Star and ' + image)
-    if(this.state.favorites.indexOf(id) !== -1){
-
-      this.removeStar(id)
-    } else {
-      this.setState(prevState => ({
-        favorites: prevState.favorites.concat(id)
-      }));
-      this.favoritesToDatabase(id, name, image);
-    }
-  }
   removeStar(recipe){
     console.log('remove hit')
     let recipeLocation = this.state.favorites.indexOf(recipe)
@@ -163,10 +185,10 @@ export default class App extends Component {
             user={this.state.user}
             searchTerm={this.state.searchTerm}
             recipeQuery={this.state.recipeQuery}
-            onClickLogin={this.login = this.login.bind(this)}
-            onClickLogout={this.logout = this.logout.bind(this)}
-            onChange={this.handleChange = this.handleChange.bind(this)}
-            onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+            onClickLogin={this.login}
+            onClickLogout={this.logout}
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
             handleStar={this.handleStar}
             favorites={this.state.favorites}
           />
@@ -177,10 +199,10 @@ export default class App extends Component {
             render={(routeProps) => (<Home {...routeProps}
               user={this.state.user}
               searchTerm={this.state.searchTerm}
-              onClickLogin={this.login = this.login.bind(this)}
-              onClickLogout={this.logout = this.logout.bind(this)}
-              onChange={this.handleChange = this.handleChange.bind(this)}
-              onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+              onClickLogin={this.login}
+              onClickLogout={this.logout}
+              onChange={this.handleChange}
+              onSubmit={this.handleSubmit}
             />
             )}
           />
@@ -189,10 +211,10 @@ export default class App extends Component {
             render={(routeProps) => (<Create {...routeProps}
               user={this.state.user}
               searchTerm={this.state.searchTerm}
-              onClickLogin={this.login = this.login.bind(this)}
-              onClickLogout={this.logout = this.logout.bind(this)}
-              onChange={this.handleChange = this.handleChange.bind(this)}
-              onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+              onClickLogin={this.login}
+              onClickLogout={this.logout}
+              onChange={this.handleChange}
+              onSubmit={this.handleSubmit}
             />
             )}
           />
@@ -202,10 +224,10 @@ export default class App extends Component {
               user={this.state.user}
               searchTerm={this.state.searchTerm}
               recipeQuery={this.state.recipeQuery}
-              onClickLogin={this.login = this.login.bind(this)}
-              onClickLogout={this.logout = this.logout.bind(this)}
-              onChange={this.handleChange = this.handleChange.bind(this)}
-              onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+              onClickLogin={this.login}
+              onClickLogout={this.logout}
+              onChange={this.handleChange}
+              onSubmit={this.handleSubmit}
             />
             )}
           />
