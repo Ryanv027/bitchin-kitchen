@@ -19,6 +19,15 @@ module.exports = function(app){
             console.log(created)
         })
     })
+    app.post('/api/deleteFavorites', (req, res) => {
+        db.recipe.destroy({where: {chef: req.body.fuid, recipe_id: req.body.recipeID}})
+            .then(response => {
+                res.send('Successfully deleted')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    })
 }
 
                 // db.recipe.create(
