@@ -103,7 +103,8 @@ handleSearch(event){
               favorites={this.props.favorites}
               getFavorites={this.getFavorites}
               />
-              : 'Loading Data...'} 
+              : 
+              <h1 className='text-center mt-5'>You need to go star some items first!</h1>} 
             </div>
          </div>
           <FavRecipeModal  
