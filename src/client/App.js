@@ -89,24 +89,24 @@ export default class App extends Component {
   }
   favoritesToDatabase(recipe){
     console.log('hit favorite')
-  //   if(this.state.user.uid){
-  //   fetch('/api/addFavorites', {
-  //     method: 'POST',
-  //     headers: {
-  //      'Content-Type': 'application/json'
-  //     },
-  //     body: 
-  //       JSON.stringify(
-  //         {recipes: this.state.favorites,
-  //           fuid: this.state.user.uid
-  //         })
+    if(this.state.user.uid){
+    fetch('/api/addFavorites', {
+      method: 'POST',
+      headers: {
+       'Content-Type': 'application/json'
+      },
+      body: 
+        JSON.stringify(
+          {recipe: recipe,
+            fuid: this.state.user.uid
+          })
       
-  //   }).then(response => {
-  //     return response.text();
-  //   }).then(response => {
-  //     console.log(response)
-  //   })
-  // }
+    }).then(response => {
+      return response.text();
+    }).then(response => {
+      console.log(response)
+    })
+  }
   }
 
   componentDidMount() {
@@ -138,7 +138,6 @@ export default class App extends Component {
       }));
       this.favoritesToDatabase(recipe);
     }
-    //user.fuid
   }
   removeStar(recipe){
     console.log('remove hit')

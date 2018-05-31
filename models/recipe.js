@@ -41,9 +41,6 @@ module.exports = function (sequelize, DataTypes) {
     favorites: {
       type: DataTypes.ARRAY(DataTypes.TEXT)
     },
-    fuid: {
-      type: DataTypes.STRING
-    }
   });
 
   recipe.associate = function (models) {

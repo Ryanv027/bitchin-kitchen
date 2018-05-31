@@ -82,7 +82,7 @@ export default class RecipeScroller extends React.Component {
         const position = document.getElementById('scrollboxId').scrollTop
         console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
         if(position > (this.state.startingPosition)){
-            this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (450)}));
+            this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (400)}));
             this.scrollRecipes();
         }
     }
