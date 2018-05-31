@@ -10,8 +10,8 @@ module.exports = function(app){
     });
 
     app.post('/api/addFavorites', (req, res) => {
-        console.log("THIS IS MY BODY!!!!! " + req.body.fuid)
-    db.recipe.findOrCreate({where: {chef: req.body.fuid, recipe_name: req.body.recipe}})
+        console.log("THIS IS MY BODY!!!!! " + req.body.recipeName + ' ' + req.body.recipeImg)
+    db.recipe.findOrCreate({where: {chef: req.body.fuid, recipe_id: req.body.recipeID}, defaults: {recipe_name: req.body.recipeName, image_url: `${req.body.recipeImg}`}})
         .spread((user, created) => {
             console.log(user.get({
                 plain: true
