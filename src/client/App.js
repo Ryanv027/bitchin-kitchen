@@ -87,8 +87,8 @@ export default class App extends Component {
         });
       });
   }
-  favoritesToDatabase(recipe){
-    console.log('hit favorite')
+  favoritesToDatabase(id, name, image){
+    console.log('hit favorite ' + name + ' ' + image )
     if(this.state.user.uid){
     fetch('/api/addFavorites', {
       method: 'POST',
@@ -97,7 +97,9 @@ export default class App extends Component {
       },
       body: 
         JSON.stringify(
-          {recipe: recipe,
+          {recipeID: id,
+            recipeName: name,
+            recipeImg: image,
             fuid: this.state.user.uid
           })
       
@@ -128,15 +130,16 @@ export default class App extends Component {
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
-  handleStar(recipe){
-    if(this.state.favorites.indexOf(recipe) !== -1){
+  handleStar(id, name, image){
+    console.log(name + ' Handle Star and ' + image)
+    if(this.state.favorites.indexOf(id) !== -1){
 
-      this.removeStar(recipe)
+      this.removeStar(id)
     } else {
       this.setState(prevState => ({
-        favorites: prevState.favorites.concat(recipe)
+        favorites: prevState.favorites.concat(id)
       }));
-      this.favoritesToDatabase(recipe);
+      this.favoritesToDatabase(id, name, image);
     }
   }
   removeStar(recipe){

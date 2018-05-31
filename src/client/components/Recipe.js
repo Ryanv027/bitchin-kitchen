@@ -32,7 +32,7 @@ export default class Recipe extends React.Component {
                             <p 
                                 className={`col-3 favHolder ${this.props.favorites.indexOf(recipe.id) !== -1 ? 'selected' : 'fav'}`}
                                 onClick={(e) => {
-                                this.props.handleStar(recipe.id)
+                                this.props.handleStar(recipe.id, recipe.recipeName, recipe.smallImageUrls)
                             }}>
                             ★</p>
                         </div>
