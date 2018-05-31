@@ -37,7 +37,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     tags: {
       type: DataTypes.STRING
-    }
+    },
+    favorites: {
+      type: DataTypes.ARRAY(DataTypes.TEXT)
+    },
   });
 
   recipe.associate = function (models) {

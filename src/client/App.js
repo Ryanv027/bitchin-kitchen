@@ -36,6 +36,7 @@ export default class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleStar = this.handleStar.bind(this);
     this.removeStar = this.removeStar.bind(this);
+    this.favoritesToDatabase = this.favoritesToDatabase.bind(this);
   }
 
   logout() {
@@ -84,10 +85,28 @@ export default class App extends Component {
         }).catch(error => {
             console.log(error)
         });
-
-        
-
       });
+  }
+  favoritesToDatabase(recipe){
+    console.log('hit favorite')
+    if(this.state.user.uid){
+    fetch('/api/addFavorites', {
+      method: 'POST',
+      headers: {
+       'Content-Type': 'application/json'
+      },
+      body: 
+        JSON.stringify(
+          {recipe: recipe,
+            fuid: this.state.user.uid
+          })
+      
+    }).then(response => {
+      return response.text();
+    }).then(response => {
+      console.log(response)
+    })
+  }
   }
 
   componentDidMount() {
@@ -97,8 +116,12 @@ export default class App extends Component {
       }
     });
   }
+  componentDidUpdate(){
+    
+  }
 
   handleSubmit(event) {
+    console.log('firing')
     this.setState({ recipeQuery: this.state.searchTerm, searchRedirect: true });
   }
 
@@ -107,15 +130,14 @@ export default class App extends Component {
   }
   handleStar(recipe){
     if(this.state.favorites.indexOf(recipe) !== -1){
-      console.log('if hit')
+
       this.removeStar(recipe)
     } else {
-      console.log('else hit')
       this.setState(prevState => ({
         favorites: prevState.favorites.concat(recipe)
       }));
+      this.favoritesToDatabase(recipe);
     }
-    //user.fuid
   }
   removeStar(recipe){
     console.log('remove hit')

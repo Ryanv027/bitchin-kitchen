@@ -2,13 +2,6 @@ import React from 'react';
 import ReactStars from 'react-stars'
 
 export default class Recipe extends React.Component {
-    constructor(props){
-        super(props)
-        this.handleToggle = this.handleToggle.bind(this)
-    }
-    handleToggle(e){
-        //console.log(e)
-    }
     render(){
         let list = this.props.recipes.map((recipe) => {
             return (
@@ -40,8 +33,6 @@ export default class Recipe extends React.Component {
                                 className={`col-3 favHolder ${this.props.favorites.indexOf(recipe.id) !== -1 ? 'selected' : 'fav'}`}
                                 onClick={(e) => {
                                 this.props.handleStar(recipe.id)
-                                this.handleToggle(this)
-                                //console.log(this)
                             }}>
                             ★</p>
                         </div>

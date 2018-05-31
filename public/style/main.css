@@ -6810,7 +6810,7 @@ footer {
 
 .recipes {
   border: 1px solid black;
-  height: 161px;
+  height: 135px;
   overflow: scroll;
   padding: 0px;
   background-color: white; }
@@ -6818,6 +6818,7 @@ footer {
 .recipeHeader {
   font-family: 'Vollkorn', serif;
   padding: 5px;
+  font-size: 18px;
   background-color: #626e7b;
   border-bottom: 1px solid #8d8d8d;
   margin: 0px;

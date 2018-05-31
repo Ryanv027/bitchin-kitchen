@@ -9,7 +9,6 @@ export default class User extends React.Component {
         
     }
     render(){
-        //console.log( 'User recipeQuery: ', this.props.recipeQuery);
         return (
             <div>
                 <Newnav 
