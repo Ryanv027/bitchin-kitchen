@@ -11,7 +11,7 @@ export class Favorites extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        chef: '',
+        chef: this.props.user.uid,
         data: [],    
         page: 1,
         choice: (this.props.recipeQuery) ? this.props.recipeQuery : 'sushi',
@@ -28,6 +28,9 @@ componentWillReceiveProps(nextProps){
   if(nextProps.user !== this.props.user){
       this.setState({chef:nextProps.user.uid});
   }
+}
+componentDidMount(){
+  console.log(this.state.chef)
 }
 
 componentDidUpdate( prevProps, prevState, snapshot){
