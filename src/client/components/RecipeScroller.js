@@ -32,6 +32,7 @@ export default class RecipeScroller extends React.Component {
         this.searchRecipes();
     }   
     searchRecipes( ){
+        console.log('Search hit')
         let choice;
         if(this.props.recipeQuery){
              choice = this.props.recipeQuery;
@@ -39,19 +40,22 @@ export default class RecipeScroller extends React.Component {
         }else{
             choice = this.state.choice;
         }
+        console.log(choice)
         let url = `/api/recipe-search/${choice}/${this.state.page}`
         let recipes = []
+        console.log(url)
         fetch(url)
             .then(response => {
                 return response.json();
             }).then(data => {
+                console.log('data')
                 for(let i = 0; i < 10; i++){
                     recipes.push(data[i])
                 }
                 if(recipes.length > 9){
                     this.setState( (prevState) => ({ 
                         data: recipes,
-                        page: prevState.page + 1,
+                        page: 1,
                         startingPosition: 50
                     }))
         
@@ -76,7 +80,7 @@ export default class RecipeScroller extends React.Component {
     }
     handleScroll(){
         const position = document.getElementById('scrollboxId').scrollTop
-        //console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
+        console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
         if(position > (this.state.startingPosition)){
             this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (450)}));
             this.scrollRecipes();

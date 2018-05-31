@@ -11,34 +11,34 @@ module.exports = function(app){
 
     app.post('/api/addFavorites', (req, res) => {
         console.log("THIS IS MY BODY!!!!! " + req.body.fuid)
-        db.recipe.findOne({where: {fuid: req.body.fuid}})
-            .then(response => {
-                if(response === null){
-                    console.log('first if ')
-                    db.recipe.create(
-                        {fuid: req.body.fuid,
-                        favorites: req.body.recipes}
-                    )
-                    .then(response => {
-                        console.log(response)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                } else {
-                    console.log('else')
-                    db.recipe.update(
-                        {favorites: req.body.recipes},
-                        {where: {fuid: req.body.fuid}}
-                    )
-                    .then(response => {
-                        console.log(response)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                }
-            })
+        // db.recipe.findOne({where: {fuid: req.body.fuid}})
+        //     .then(response => {
+        //         if(response === null){
+        //             console.log('first if ')
+        //             db.recipe.create(
+        //                 {fuid: req.body.fuid,
+        //                 favorites: req.body.recipes}
+        //             )
+        //             .then(response => {
+        //                 console.log(response)
+        //             })
+        //             .catch(error => {
+        //                 console.log(error)
+        //             })
+        //         } else {
+        //             console.log('else')
+        //             db.recipe.update(
+        //                 {favorites: req.body.recipes},
+        //                 {where: {fuid: req.body.fuid}}
+        //             )
+        //             .then(response => {
+        //                 console.log(response)
+        //             })
+        //             .catch(error => {
+        //                 console.log(error)
+        //             })
+        //         }
+        //     })
     })
 }
                 // db.recipe.create(

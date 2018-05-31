@@ -89,24 +89,24 @@ export default class App extends Component {
   }
   favoritesToDatabase(recipe){
     console.log('hit favorite')
-    if(this.state.user.uid){
-    fetch('/api/addFavorites', {
-      method: 'POST',
-      headers: {
-       'Content-Type': 'application/json'
-      },
-      body: 
-        JSON.stringify(
-          {recipes: this.state.favorites,
-            fuid: this.state.user.uid
-          })
+  //   if(this.state.user.uid){
+  //   fetch('/api/addFavorites', {
+  //     method: 'POST',
+  //     headers: {
+  //      'Content-Type': 'application/json'
+  //     },
+  //     body: 
+  //       JSON.stringify(
+  //         {recipes: this.state.favorites,
+  //           fuid: this.state.user.uid
+  //         })
       
-    }).then(response => {
-      return response.text();
-    }).then(response => {
-      console.log(response)
-    })
-  }
+  //   }).then(response => {
+  //     return response.text();
+  //   }).then(response => {
+  //     console.log(response)
+  //   })
+  // }
   }
 
   componentDidMount() {
@@ -121,6 +121,7 @@ export default class App extends Component {
   }
 
   handleSubmit(event) {
+    console.log('firing')
     this.setState({ recipeQuery: this.state.searchTerm, searchRedirect: true });
   }
 
@@ -129,11 +130,10 @@ export default class App extends Component {
   }
   handleStar(recipe){
     if(this.state.favorites.indexOf(recipe) !== -1){
-      console.log('if hit')
+
       this.removeStar(recipe)
     } else {
-      console.log('else hit')
-      this.favoritesToDatabase(recipe);
+      // this.favoritesToDatabase(recipe);
       this.setState(prevState => ({
         favorites: prevState.favorites.concat(recipe)
       }));
