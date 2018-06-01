@@ -13,13 +13,13 @@ export class FavRecipe extends React.Component {
                     <div
                     className='recipes'
                     >
-                        <h1
+                        <h4
                         className='recipeHeader text-center'
                         onClick={(e) => {
                             this.props.handleRecipe(recipe.id)
                         }}
                         >{recipe.recipe_name}
-                        </h1>
+                        </h4>
                         <div className="row">
                             <img 
                             src={recipe.image_url} 
