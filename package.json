@@ -10,7 +10,7 @@
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "npx webpack --config"
+    "heroku-postbuild": "npx webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
