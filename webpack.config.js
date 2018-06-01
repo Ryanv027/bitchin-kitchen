@@ -1,4 +1,4 @@
-var debug = process.env.NODE_ENV !== "production";
+var debug = process.env.NODE_ENV !== "hotcakes";
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -27,6 +27,7 @@ module.exports = {
         }),
     ] : [
             new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.OccurenceOrderPlugin(),
             new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
         ],
     module: {
