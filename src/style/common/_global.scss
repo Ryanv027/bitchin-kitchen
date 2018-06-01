@@ -29,13 +29,6 @@ footer {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#6e000000',GradientType=0 ); /* IE6-9 */
 }
 
-.recipes.card {
-  // border: 1px solid black;
-  max-height: 320px;
-  background-color: white;
-  position: relative;
-}
-
 .recipes .card-title {
   margin-top: 0.6em;
   padding: 0 1.25rem;
@@ -53,8 +46,62 @@ footer {
   cursor: pointer;
 }
 
-.recipeHolder {
+.row {
+  @include media-breakpoint-only(sm) { 
+    margin-left: 0;
+    margin-right: 0;
+  }  
+  @include media-breakpoint-only(md) { 
+    margin-left: 0;
+    margin-right: 0;
+  }  
+}
+
+.recipes.card {
   margin-bottom: 2em;
+  margin-right: auto;
+  background-color: white;
+  position: relative;
+  // height: 420px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 20%;
+  flex: 1 0 20%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-right: 15px;
+  margin-left: 15px;
+  @include media-breakpoint-only(sm) { 
+    -ms-flex: 1 0 100%;
+    flex: 1 0 100%;
+  }
+  @include media-breakpoint-only(md) { 
+    -ms-flex: 1 0 32%;
+    flex: 1 0 32%;
+  }
+  @include media-breakpoint-up(lg) { 
+    -ms-flex: 1 0 20%;
+    flex: 1 0 20%;
+  }
+}
+
+.card-deck {
+  @include media-breakpoint-only(sm) { 
+    // padding-left: 100%;
+    column-count: 1;
+  }
+  @include media-breakpoint-only(md) { 
+    // max-width: 50%;
+    column-count: 2;
+  }
+  @include media-breakpoint-up(lg) { 
+    // max-width: 24%;
+    column-count: 4;
+  }
 }
 
 .recipes .recipeImage {
@@ -72,7 +119,7 @@ footer {
   z-index: 0;
 }
 
-.fav {
+.fav, .selected {
   color: #F0F0F0;
   cursor: pointer;
   position: absolute;
@@ -83,10 +130,10 @@ footer {
 }
 
 .selected {
-  color: #F4B30A;
+  color: #FFFF00;
   text-shadow: 0 0 1px #F48F0A;
-  font-size: 30px;
-  cursor: pointer;
+  // font-size: 30px;
+  // cursor: pointer;
 }
 
 .favHolder {

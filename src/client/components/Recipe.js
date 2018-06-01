@@ -5,11 +5,12 @@ export default class Recipe extends React.Component {
     render(){
         let list = this.props.recipes.map((recipe) => {
             console.log(recipe);
+            const ingredients_list = recipe.ingredients;
             return (
-                <div className='recipeHolder col-md-4 col-12'
-                key={Math.random()} >
+                
                     <div
                     className='recipes card'
+                    key={Math.random()} 
                     >
                         <span 
                             className={`favHolder ${this.props.favorites.indexOf(recipe.id) !== -1 ? 'selected' : 'fav'}`}
@@ -33,17 +34,20 @@ export default class Recipe extends React.Component {
                         </h4>
                         <div className="card-body">
                             <div className="card-text">
-                                <span className="recipeSource text-center">
+                            <p>
+                                ingredients: {ingredients_list.join(', ')}
+                            </p>
+                                <span className="recipeSource">
                                     {`Rating: ${recipe.rating}`}
                                 </span>
                             </div>
                         </div>
                     </div> 
-                </div>
+                
             )
         })
         return (
-            <div className="row"> 
+            <div className="card-deck"> 
                 {this.props.recipes.length > 0 && list}
             </div>
         )
