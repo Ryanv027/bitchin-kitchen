@@ -4,7 +4,7 @@ import ReactStars from 'react-stars'
 export default class Recipe extends React.Component {
     render(){
         let list = this.props.recipes.map((recipe) => {
-            console.log(recipe);
+            // console.log(recipe);
             const ingredients_list = recipe.ingredients;
             return (
                 

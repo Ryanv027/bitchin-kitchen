@@ -8,72 +8,9 @@ import { isError } from 'util';
 
 
 export class Favorites extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-        chef: this.props.user.uid,
-        data: [],    
-        page: 1,
-        choice: (this.props.recipeQuery) ? this.props.recipeQuery : 'sushi',
-        selectedRecipe: false,
-        searchTerm: '',
-        recipeQuery: '',
-    }
-    console.log(this.props.recipeQuery);
-    this.handleModal = this.handleModal.bind(this);
-    this.handleRecipe = this.handleRecipe.bind(this);
-}
-
-componentWillReceiveProps(nextProps){
-  if(nextProps.user !== this.props.user){
-      this.setState({chef:nextProps.user.uid});
-  }
-}
-componentDidMount(){
-  this.getFavorites();
-}
-
-componentDidUpdate( prevProps, prevState, snapshot){
-    if(prevProps.recipeQuery === this.props.recipeQuery) return;
-    this.getFavorites();
-}   
-getFavorites( ){
-  console.log('getFavorites in FAVORITES')
-  fetch(`/api/getUserFavorites/${this.state.chef}`)
-  .then(response => {
-    return response.json();
-  })
-  .then(response => {
-    this.setDataState(response)
-  })
-  .catch(error => {
-    console.log(error)
-  })
-}
-setDataState(recipes){
-  let data = []
-  for(let i =0; i < recipes.length; i++){
-    data.push(recipes[i])
-  }
-  this.setState({ data })
-}
-handleRecipe(id){
-    let url = `/api/get-recipe/${id}`
-    fetch(url)
-        .then(response => {
-           return response.json();
-        }).then(data => {
-            this.setState(({ selectedRecipe: data }))                
-        }).catch(error => {
-            console.log(error)
-        })
-}
-handleModal(){
-    this.setState(({ selectedRecipe: false }))
-}
-
-handleSearch(event){
-
+  componentDidMount() {
+    this.props.getUserFavorites()
+    this.props.getFavorites()
 }
   render() {
     return (
@@ -93,23 +30,23 @@ handleSearch(event){
             <div 
             className='scrollBox col-10 m-auto'
             id="scrollboxId"
-            onScroll={this.handleScroll}
+            onScroll={this.props.handleScroll}
             >
-              {this.state.data.length > 0 ? 
+              {this.props.favdata.length > 0 ? 
               <FavRecipe 
-              recipes={this.state.data} 
-              handleRecipe={this.handleRecipe}
+              favdata={this.props.favdata} 
+              handleRecipe={this.props.handleRecipe}
               handleStar={this.props.handleStar}
               favorites={this.props.favorites}
-              getFavorites={this.getFavorites}
+              getFavorites={this.props.getFavorites}
               />
               : 
               <h1 className='text-center mt-5'>You need to go star some items first!</h1>} 
             </div>
          </div>
           <FavRecipeModal  
-          selectedRecipe={this.state.selectedRecipe} 
-          handleModal={this.handleModal}
+          selectedRecipe={this.props.selectedRecipe} 
+          handleModal={this.props.handleModal}
           />
           <footer className="footer">
             <div className="row m-0">

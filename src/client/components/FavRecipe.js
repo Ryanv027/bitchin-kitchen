@@ -2,8 +2,8 @@ import React from 'react';
 
 export class FavRecipe extends React.Component {
     render(){
-        console.log(this.props.recipes[0])
-        let list = this.props.recipes.map((recipe) => {
+        console.log(this.props.favdata[0])
+        let list = this.props.favdata.map((recipe) => {
             console.log('WHAT THE FUCK')
             console.log(this.props.favorites)
             console.log(recipe.recipe_id)
@@ -42,7 +42,7 @@ export class FavRecipe extends React.Component {
         })
         return (
             <div className="row"> 
-                {this.props.recipes.length > 0 && list}
+                {this.props.favdata.length > 0 && list}
             </div>
         )
     }
