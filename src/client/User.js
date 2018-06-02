@@ -13,10 +13,12 @@ export default class User extends React.Component {
         return (
             <div>
                 <Newnav 
-                    user={this.props.user}
-                    onChange={this.props.onChange}
-                    searchTerm={this.props.searchTerm}
-                    onSubmit={this.props.onSubmit}
+                   user={this.props.user}
+                   onClickLogin={this.props.onClickLogin}
+                   onClickLogout={this.props.onClickLogout}
+                   searchTerm={this.props.searchTerm}
+                   onChange={this.props.onChange}
+                   onSubmit={this.props.onSubmit}
                 />
                 <RecipeScroller 
                 recipeQuery={this.props.recipeQuery} 

@@ -140,8 +140,8 @@ export default class App extends Component {
             recipeQuery={this.state.recipeQuery}
             onClickLogin={this.login = this.login.bind(this)}
             onClickLogout={this.logout = this.logout.bind(this)}
-            onChange={this.handleChange = this.handleChange.bind(this)}
-            onSubmit={this.handleSubmit = this.handleSubmit.bind(this)}
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
             handleStar={this.handleStar}
             favorites={this.state.favorites}
           />
