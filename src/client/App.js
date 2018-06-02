@@ -44,6 +44,7 @@ export default class App extends Component {
     this.handleRecipe = this.handleRecipe.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.scrollRecipes = this.scrollRecipes.bind(this);
+    this.searchRecipes = this.searchRecipes.bind(this);
   }
 
 componentWillMount() {
@@ -64,6 +65,7 @@ componentWillMount() {
 
   componentDidMount() {
     this.getFavorites();
+    this.searchRecipes()
     // this.getUserFavorites();
     
   }
@@ -78,9 +80,14 @@ componentWillMount() {
     
   }
 
-  componentDidUpdate( prevProps, prevState, snapshot){
-    // this.getFavorites();
-  }   
+   componentDidUpdate( prevProps, prevState, snapshot){
+        if(prevProps.recipeQuery === this.props.recipeQuery) {
+            return false
+        } else {
+        this.setState({ page: 1, startingPosition: 50})
+        this.searchRecipes();
+        }
+    }   
   
 
   getFavorites( ){
@@ -238,8 +245,8 @@ componentWillMount() {
     //// console.log('Search hit')
     let choice;
     if(this.state.recipeQuery){
-        choice = this.state.recipeQuery;
-        this.state.choice = this.state.recipeQuery;
+      choice = this.state.recipeQuery;
+      this.state.choice = this.state.recipeQuery;
     }else{
         choice = this.state.choice;
     }
@@ -407,6 +414,7 @@ handleStar(id, name, image){
             handleRecipe={this.handleRecipe}
             handleModal={this.handleModal}
             scrollRecipes={this.scrollRecipes}
+            searchRecipes={this.searchRecipes}
           />
           )}
           />
