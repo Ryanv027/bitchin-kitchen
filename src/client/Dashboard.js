@@ -29,12 +29,7 @@ export class Dashboard extends React.Component {
     render() {
         return (
             <div>
-
-
                 <Newnav />
-
-
-
 
                 <div className="container">
                     <div className="row mt-2">
@@ -59,11 +54,10 @@ export class Dashboard extends React.Component {
                             <div className="col-12 pt-3">
                                 <p className="text-center">
                                     Created by Brian, Kyle, Robert and Ryan in 2018
-              </p>
+                                </p>
                             </div>
                         </div>
                     </footer>
-
                 </div>
             </div>
         )

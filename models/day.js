@@ -14,14 +14,11 @@ module.exports = function (sequelize, DataTypes) {
       }
     }
   });
-
-
   day.associate = function (models) {
     day.hasMany(models.recipe)
     day.belongsTo(models.user)
 
   }
-
   return day;
 
 };

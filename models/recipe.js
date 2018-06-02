@@ -14,6 +14,9 @@ module.exports = function (sequelize, DataTypes) {
       //   notNull: true
       // }
     },
+    recipe_id: {
+      type: DataTypes.STRING(50)
+    },
     image_url: {
       type: DataTypes.STRING,
       validate: {
@@ -37,7 +40,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     tags: {
       type: DataTypes.STRING
-    }
+    },
+    favorites: {
+      type: DataTypes.ARRAY(DataTypes.TEXT)
+    },
   });
 
   recipe.associate = function (models) {

@@ -2,42 +2,46 @@ import React from 'react';
 
 export class FavRecipe extends React.Component {
     render(){
-        console.log(this.props)
-        let list = this.props.recipes.map((recipe) => {
+        console.log(this.props.favdata[0])
+        let list = this.props.favdata.map((recipe) => {
             return (
-                <div className='recipeHolder col-md-4 col-12'
+                <div className='recipes card'
                 key={Math.random()} >
-                    <div
-                    className='recipes'
-                    >
-                        <h1
-                        className='recipeHeader text-center'
+                        <span
+                            className={`favHolder ${this.props.favorites.indexOf(recipe.recipe_id) !== -1 ? 'selected' : 'fav'}`}
+                            onClick={(e) => {
+                            this.props.handleStar(recipe.recipe_id)
+                            this.props.getFavorites
+                        }}>
+                        ★</span>
+                        <img 
+                            src={recipe.image_url} 
+                            alt={recipe.recipe_name} 
+                            height={100}
+                            width={120}
+                            className="card-img-top recipeImage"
+                            />
+                        <h4
+                        className='card-title'
                         onClick={(e) => {
                             this.props.handleRecipe(recipe.id)
                         }}
-                        >{recipe.recipeName}
-                        </h1>
-                        <div className="row">
-                            <img 
-                            src={recipe.smallImageUrls} 
-                            alt={recipe.recipeName} 
-                            height={100}
-                            width={120}
-                            className="recipeImage col-6"
-                            />
-                            <p className="recipeSource text-center col-3">
-                            
-                            {`Rating: ${recipe.rating}`}
+                        >{recipe.recipe_name}
+                        </h4>
+                        <div className="card-body">
+                            <div className="card-text">
+                            <p>
+                                ingredients: who knows! But you sure do like them.
                             </p>
-                            <p className='col-3 favHolder'><span onClick={(e) => this.props.handleStar(recipe.id)} className='fav'>★</span></p>
+                            </div>
                         </div>
-                    </div> 
+                    
                 </div>
             )
         })
         return (
-            <div className="row"> 
-                {this.props.recipes.length > 0 && list}
+            <div className="card-deck"> 
+                {this.props.favdata.length > 0 && list}
             </div>
         )
     }

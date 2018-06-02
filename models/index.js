@@ -7,7 +7,6 @@ var basename = path.basename(module.filename);
 var env = process.env.NODE_ENV
 var db = {};
 
-
 var sequelize = new Sequelize(process.env.RDS_DB_NAME, process.env.RDS_USERNAME, process.env.RDS_PASSWORD, {
   dialect: 'postgres',
   host: process.env.RDS_HOSTNAME
