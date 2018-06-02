@@ -47,21 +47,21 @@ export default class App extends Component {
     this.searchRecipes = this.searchRecipes.bind(this);
   }
 
-componentWillMount() {
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      this.setState({ 
-        user,
-        chef: user.uid 
-      });
-      this.getFavorites();
+  componentWillMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ 
+          user,
+          chef: user.uid 
+        });
+        this.getFavorites();
 
-    } else {
-      window.location.href = '/#/'
-    }
-  });
-  this.searchRecipes();
-}
+      } else {
+        window.location.href = '/#/'
+      }
+    });
+    this.searchRecipes();
+  }
 
   componentDidMount() {
     this.getFavorites();
@@ -80,7 +80,7 @@ componentWillMount() {
     
   }
 
-   componentDidUpdate( prevProps, prevState, snapshot){
+  componentDidUpdate( prevProps, prevState, snapshot){
         if(prevProps.recipeQuery === this.props.recipeQuery) {
             return false
         } else {
@@ -89,7 +89,7 @@ componentWillMount() {
         }
     }   
   
-
+  
   getFavorites( ){
     // console.log('getFavorites in FAVORITES')
     fetch(`/api/getUserFavorites/${this.state.chef}`)
@@ -216,8 +216,6 @@ componentWillMount() {
     this.setState({ favorites: favs})
   }
 
-  
-
   favoritesToDatabase(id, name, image){
     if(this.state.user.uid){
     fetch('/api/addFavorites', {
@@ -264,7 +262,8 @@ componentWillMount() {
             }
             if(recipes.length > 9){
                 this.setState( (prevState) => ({ 
-                    data: recipes
+                    data: recipes,
+                    startingPosition: 50
                 }))
     
             }
@@ -272,7 +271,6 @@ componentWillMount() {
             // console.log(error)
     })
   }
-
 
   deleteFavorites(id){
     // console.log('working delete')
@@ -381,7 +379,7 @@ handleStar(id, name, image){
 
   handleScroll(){
     const position = document.getElementById('scrollboxId').scrollTop
-    // // console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
+    console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
     if(position > (this.state.startingPosition)){
         this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (400)}));
         this.scrollRecipes();
