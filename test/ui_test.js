@@ -43,7 +43,7 @@ describe('Load a series of Pages on the Deployed Environment', function() {
     describe('/ (Home Page)', () => {
       it('should load without error', done => {
         // your actual testing urls will likely be `http://localhost:port/path`
-        nightmare.goto('http://localhost:8080/')
+        nightmare.goto('http://localhost:8081/')
           .end()
           .then(function (result) { done() })
           .catch(done)
@@ -53,7 +53,7 @@ describe('Load a series of Pages on the Deployed Environment', function() {
     describe('/user (User Page)', () => {
       it('should load without error', done => {
         // your actual testing urls will likely be `http://localhost:port/path`
-        nightmare.goto('http://localhost:8080/#/user')
+        nightmare.goto('http://localhost:8081/#/user')
           .end()
           .then(function (result) { done() })
           .catch(done)
@@ -106,7 +106,7 @@ describe('Load a series of Pages on the Deployed Environment', function() {
     describe('given a search query', () => {
       it('should find and recieve a result', done => {
         nightmare
-        .goto('http://localhost:8080/#/user')
+        .goto('http://localhost:8081/#/user')
         .click('.navbar-toggler-icon')
         .type('#recipe-search', 'pizza')
         .click('#search-submit')
