@@ -27,6 +27,11 @@ export default class User extends React.Component {
                     favorites={this.props.favorites}
                     getUserFavorites={this.props.getUserFavorites}
                     handleScroll={this.props.handleScroll}
+                    handleRecipe={this.props.handleRecipe}
+                    handleModal={this.props.handleModal}
+                    selectedRecipe={this.props.selectedRecipe}
+                    scrollRecipes={this.props.scrollRecipes}
+                    searchRecipes={this.props.searchRecipes}
                 />
             </div>
         )

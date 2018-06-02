@@ -28,14 +28,14 @@ export default class RecipeScroller extends React.Component {
     //     this.searchRecipes();
     //     this.props.getUserFavorites();
     // }
-    // componentDidUpdate( prevProps, prevState, snapshot){
-    //     if(prevProps.recipeQuery === this.props.recipeQuery) {
-    //         return false
-    //     } else {
-    //     this.setState({ page: 1, startingPosition: 50})
-    //     this.searchRecipes();
-    //     }
-    // }   
+    componentDidUpdate( prevProps, prevState, snapshot){
+        if(prevProps.recipeQuery === this.props.recipeQuery) {
+            return false
+        } else {
+        this.setState({ page: 1, startingPosition: 50})
+        this.props.searchRecipes();
+        }
+    }   
     // searchRecipes( ){
     //     //console.log('Search hit')
     //     let choice;
@@ -126,7 +126,6 @@ export default class RecipeScroller extends React.Component {
                         <Recipe 
                         recipes={this.props.data} 
                         handleRecipe={this.props.handleRecipe}
-                        paginationCall={this.props.paginationCall}
                         handleStar={this.props.handleStar}
                         favorites={this.props.favorites}
                         />
