@@ -9,7 +9,8 @@
     "start": "node server.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "npx webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
