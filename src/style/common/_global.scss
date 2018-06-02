@@ -4,9 +4,17 @@
 
 .monreg { font-family: 'montserratreg' }
 
-body {
+html {
+  display: block;
+  @include media-breakpoint-only(sm) { 
+    display: none;
+  }  
+}
+
+body, #root {
   font-size: 13px;
   font-family: 'montserratreg';
+  height: 100vh;
 }
 
 body, p {
@@ -17,9 +25,88 @@ footer {
   font-size: 12px;
 }
 
+.uname {
+  @include media-breakpoint-only(xs) { 
+    display: none !important;
+  }  
+  @include media-breakpoint-only(sm) { 
+  }  
+  @include media-breakpoint-only(md) { 
+  }  
+}
+
+.login {
+  @include media-breakpoint-only(sm) { 
+    font-size: 9px;
+  }  
+  @include media-breakpoint-only(md) { 
+    
+  }  
+}
+
+.avatar {
+  @include media-breakpoint-only(sm) { 
+    
+  }  
+  @include media-breakpoint-only(md) { 
+    
+  }  
+}
+
+.navbar-toggler {
+  @include media-breakpoint-up(xs) {float: right;}
+  @include media-breakpoint-up(md) {float: none;}
+  background: rgba(0,0,0, .1);
+  // margin-top: 0.4em;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  @include media-breakpoint-only(xs) {
+    text-align: center;
+  }
+  @include media-breakpoint-only(sm) {
+    text-align: center;
+  }
+}
+
+.user-wrapper {
+  @include media-breakpoint-only(xs) {
+    position: absolute;
+    left: 50%;
+    top: 26px;
+    transform: translate(-30%, 0);
+  }
+  @include media-breakpoint-only(sm) {
+    position: absolute;
+    left: 50%;
+    top: 26px;
+    transform: translate(-30%, 0);
+  }
+}
+
+
+.footer {
+  height: 42px;
+  line-height: 42px;
+}
+
+.UserProfile .User {
+  @include media-breakpoint-up(sm) { padding-left: 15%;}
+}
+
+.navbar .input-group {
+  margin-top: 18px;
+  max-height: 34px;
+}
+
+#recipe-search {
+  max-width: 50%;
+  margin: 0 0 0 auto;
+}
+
 .scrollBox {
   width: 100%;
-  height: 72vh;
+  height: 73vh;
   overflow: scroll;
   border: none;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,000000+100&0+33,0+73,0.43+100 */
@@ -78,14 +165,17 @@ footer {
   @include media-breakpoint-only(sm) { 
     -ms-flex: 1 0 100%;
     flex: 1 0 100%;
+    max-width: 17.3rem;
   }
   @include media-breakpoint-only(md) { 
     -ms-flex: 1 0 32%;
     flex: 1 0 32%;
+    max-width: 17.3rem;
   }
   @include media-breakpoint-up(lg) { 
     -ms-flex: 1 0 20%;
     flex: 1 0 20%;
+    max-width: 17.3rem;
   }
 }
 
