@@ -7,6 +7,7 @@ import * as firebaseui from 'firebaseui'
 import 'firebase/auth';
 import { Create } from './Create';
 import { Favorites } from './Favorites';
+import util from 'util';
 
 export default class App extends Component {
   constructor(props) {
@@ -52,6 +53,8 @@ componentWillMount() {
         user,
         chef: user.uid 
       });
+      this.getFavorites();
+
     } else {
       window.location.href = '/#/'
     }
@@ -77,43 +80,44 @@ componentWillMount() {
 
   componentDidUpdate( prevProps, prevState, snapshot){
     // this.getFavorites();
-}   
+  }   
   
 
   getFavorites( ){
-    console.log('getFavorites in FAVORITES')
+    // console.log('getFavorites in FAVORITES')
     fetch(`/api/getUserFavorites/${this.state.chef}`)
     .then(response => {
-      console.log(response)
+      // console.log(response)
       return response.json();
     })
     .then(response => {
+      console.log( 'get favs favdata response:', util.inspect(response));
       this.setDataState(response)
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
     })
   }
 
   getUserFavorites(){
     if(this.state.user !== null){
-      console.log('passed inspection')
+      // console.log('passed inspection')
       fetch(`/api/getUserFavorites/${this.state.user.uid}`)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           return response.json();
         })
         .then(response => {
           this.setFavoriteState(response)
         })
         .catch(error => {
-          console.log(error)
+          // console.log(error)
         })
     } 
   }
 
   setFavoriteState(recipes){
-    console.log(recipes)
+    // console.log(recipes)
     let favs = []
     for (let i = 0; i < recipes.length; i++) {
         favs.push(recipes[i].recipe_id)
@@ -144,7 +148,7 @@ componentWillMount() {
           fuid: user.uid,
         });
 
-        console.log(user);
+        // console.log(user);
 
         fetch('/api/users', {
           method: 'POST',
@@ -166,7 +170,7 @@ componentWillMount() {
         }).then(()=> {
           window.location.href = "/#/user"
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
         });
       });
   }
@@ -182,7 +186,7 @@ componentWillMount() {
 
   getUserFavorites(){
     if(this.state.user !== null){
-      console.log('passed inspection')
+      // console.log('passed inspection')
       fetch(`/api/getUserFavorites/${this.state.user.uid}`)
         .then(response => {
           return response.json();
@@ -191,13 +195,13 @@ componentWillMount() {
           this.setFavoriteState(response)
         })
         .catch(error => {
-          console.log(error)
+          // console.log(error)
         })
     } 
   }
 
   setFavoriteState(recipes){
-    console.log(recipes)
+    // console.log(recipes)
     let favs = []
     for (let i = 0; i < recipes.length; i++) {
         favs.push(recipes[i].recipe_id)
@@ -225,13 +229,13 @@ componentWillMount() {
     }).then(response => {
       return response.text();
     }).then(response => {
-      console.log(response)
+      // console.log(response)
     })
   }
   }
 
   searchRecipes( ){
-    //console.log('Search hit')
+    //// console.log('Search hit')
     let choice;
     if(this.state.recipeQuery){
         choice = this.state.recipeQuery;
@@ -239,15 +243,15 @@ componentWillMount() {
     }else{
         choice = this.state.choice;
     }
-    //console.log(choice)
+    //// console.log(choice)
     let url = `/api/recipe-search/${choice}/${this.state.page}`
     let recipes = []
-    //console.log(url)
+    //// console.log(url)
     fetch(url)
         .then(response => {
             return response.json();
         }).then(data => {
-            console.log('data')
+            // console.log('data')
             for(let i = 0; i < 10; i++){
                 recipes.push(data[i])
             }
@@ -258,13 +262,13 @@ componentWillMount() {
     
             }
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
     })
   }
 
 
   deleteFavorites(id){
-    console.log('working delete')
+    // console.log('working delete')
     if(this.state.user.uid){
       fetch('api/deleteFavorites', {
         method: 'POST',
@@ -283,27 +287,31 @@ componentWillMount() {
         return response.text();
       })
       .then(response => {
-        console.log(response)
+        // console.log(response)
       })
     } 
   } 
 
   handleSubmit(event) {
-    console.log('firing')
+    // console.log('firing')
     this.setState({ recipeQuery: this.state.searchTerm, searchRedirect: true });
   }
 
   removeStar(recipe){
-    console.log('remove hit')
+    // console.log('remove hit')
     let recipeLocation = this.state.favorites.indexOf(recipe)
-    console.log(recipeLocation)
+    // console.log(recipeLocation)
     let favorites = this.state.favorites
-    console.log(favorites)
+    // console.log(favorites)
     let newFavorites = favorites.filter((index) => {
       return index !== recipe
     })
-    console.log(newFavorites)
+    // console.log(newFavorites)
+    console.log('favdata coming?')
+    console.log(util.inspect(this.props.favdata));
     this.setState({ favorites: newFavorites })
+    // this.setState({ favdata: newFavorites })
+    this.getFavorites();
   }
 
   scrollRecipes(){
@@ -325,7 +333,7 @@ componentWillMount() {
                     }))
                 }
             }).catch(error => {
-                console.log(error)
+                // console.log(error)
             }) 
   }
 
@@ -337,7 +345,7 @@ componentWillMount() {
         }).then(data => {
             this.setState(({ selectedRecipe: data }))                
         }).catch(error => {
-            console.log(error)
+            // console.log(error)
         })
 }
 
@@ -346,7 +354,7 @@ handleChange(event) {
 }
 
 handleStar(id, name, image){
-  //console.log(name + ' Handle Star and ' + image)
+  //// console.log(name + ' Handle Star and ' + image)
   if(this.state.favorites.indexOf(id) !== -1){
     this.removeStar(id)
     this.deleteFavorites(id)
@@ -366,7 +374,7 @@ handleStar(id, name, image){
 
   handleScroll(){
     const position = document.getElementById('scrollboxId').scrollTop
-    // console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
+    // // console.log(`position:${position} startingPosition: ${(this.state.startingPosition)}`)
     if(position > (this.state.startingPosition)){
         this.setState((prevState) => ({ startingPosition: prevState.startingPosition + (400)}));
         this.scrollRecipes();
