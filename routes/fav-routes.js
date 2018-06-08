@@ -12,13 +12,30 @@ module.exports = function(app){
     app.post('/api/addFavorites', (req, res) => {
         console.log("THIS IS MY BODY!!!!! " + req.body.recipeName + ' ' + req.body.recipeImg)
     db.recipe.findOrCreate({where: {chef: req.body.fuid, recipe_id: req.body.recipeID}, defaults: {recipe_name: req.body.recipeName, image_url: `${req.body.recipeImg}`}})
-        .spread((user, created) => {
-            console.log(user.get({
-                plain: true
-            }))
-            console.log(created)
-        })
+    .then(response => {
+        res.send('Successfully Added')
     })
+    .catch(error => {
+        console.log(error)
+    })
+    })
+
+    // app.post('/api/addFavorites', (req, res) => {
+    //     console.log("THIS IS MY BODY!!!!! " + req.body.recipeName + ' ' + req.body.recipeImg)
+    // db.recipe.create({
+    //     chef: req.body.fuid, 
+    //     recipe_id: req.body.recipeID,
+    //     recipe_name: req.body.recipeName, 
+    //     image_url: `${req.body.recipeImg}`
+    // })
+    // .then(response => {
+    //     res.send('Successfully Added')
+    // })
+    // .catch(error => {
+    //     console.log(error)
+    // })
+    // })
+
     app.post('/api/deleteFavorites', (req, res) => {
         db.recipe.destroy({where: {chef: req.body.fuid, recipe_id: req.body.recipeID}})
             .then(response => {
