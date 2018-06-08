@@ -18,16 +18,16 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(50)
     },
     image_url: {
-      type: DataTypes.STRING,
-      validate: {
-        isUrl: true
-      }
+      type: DataTypes.STRING(500),
+      // validate: {
+      //   isUrl: true
+      // }
     },
     recipe_url: {
-      type: DataTypes.STRING,
-      validate: {
-        isUrl: true
-      }
+      type: DataTypes.STRING(500),
+      // validate: {
+      //   isUrl: true
+      // }
     },
     ingredients: {
       type: DataTypes.STRING
